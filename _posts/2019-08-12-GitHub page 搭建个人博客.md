@@ -1,6 +1,7 @@
 ---
 title: GitHub pages 搭建个人博客
 layout: post
+author: Wu
 tags: 学习笔记
 ---
 
@@ -15,15 +16,15 @@ tags: 学习笔记
 
 #### 创建GitHub账号
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/13/CGB7Rm45gS1yTuz.png" ></a>
+<img src="https://i.loli.net/2019/08/13/CGB7Rm45gS1yTuz.png" >
 
 #### 创建GitHub仓库
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/13/qa7uBrpZRMCzod2.png" ></a>
+<img src="https://i.loli.net/2019/08/13/qa7uBrpZRMCzod2.png" >
 
 填写信息
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/13/5Fz2rGB7lWmTakj.png" ></a>
+<img src="https://i.loli.net/2019/08/13/5Fz2rGB7lWmTakj.png" >
 
 ## gitbash
 
@@ -66,17 +67,21 @@ mkdir key_backup
 ssh-keygen -t rsa -C "*youremail@address*"
 ```
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/13/S9DGr3ct1egiw6b.png" alt="image.png"></a>
+<img src="https://i.loli.net/2019/08/13/S9DGr3ct1egiw6b.png" alt="image.png">
 
 `d_rsa.pub`这个文件是等下进行配置要用到的文件，`cat id_rsa.pub`可以显示它的内容，再复制其内容
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/14/wGnCesPvZli7qFA.png" ></a>
+<img src="https://i.loli.net/2019/08/14/wGnCesPvZli7qFA.png" >
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/14/bUoP6h9ekj74Iv1.png" ></a>
+<img src="https://i.loli.net/2019/08/14/bUoP6h9ekj74Iv1.png" >
 
 `ssh -T git@github.com`测试连通状态
 
-<a href="#" target="_blank"><img src="https://i.loli.net/2019/08/14/AlLvdOp1b8DoneQ.png" ></a>
+<img src="https://i.loli.net/2019/08/14/AlLvdOp1b8DoneQ.png" >
+
+#### GitHub Desktop
+
+<img src="https://i.loli.net/2019/08/14/x5y6jCgbIpHEknO.png" >
 
 安装Rudy
 
