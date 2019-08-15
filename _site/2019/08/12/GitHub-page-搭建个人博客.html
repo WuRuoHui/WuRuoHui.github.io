@@ -26,7 +26,7 @@
 <link href="/assets/profile.jpeg" rel="apple-touch-icon-precomposed" />
 <!-- Android Lolipop Theme Color -->
 <!-- <meta name="theme-color" content="#1464FB"> -->
-<title>GitHub page 搭建个人博客</title>
+<title>GitHub pages 搭建个人博客</title>
 <!-- 百度统计 -->
 
 <script>
@@ -100,10 +100,10 @@ var _hmt = _hmt || [];
 <!-- 引入博文顶部样式 -->
 <!-- 版本一 垃圾 -->
 <!-- <div class="wow fadeIn top" data-wow-duration="3.5s" >
-    <span class="wow fadeInUp" data-wow-delay="0.2s">GitHub page 搭建个人博客</span>
+    <span class="wow fadeInUp" data-wow-delay="0.2s">GitHub pages 搭建个人博客</span>
     <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
     <span class="wow fadeInUp" data-wow-delay="0.4s"></span>
-    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span>
+    <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;Wu</span>
 </div> -->
 
 <!-- 版本二 可切换页面 -->
@@ -117,10 +117,10 @@ var _hmt = _hmt || [];
     
   </div>
   <div class="post-titlearea">
-    <span class="wow fadeInUp" data-wow-delay="0.2s">GitHub page 搭建个人博客</span>
+    <span class="wow fadeInUp" data-wow-delay="0.2s">GitHub pages 搭建个人博客</span>
     <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
     <!-- <span class="wow fadeInUp" data-wow-delay="0.4s"></span> -->
-    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;true</span> -->
+    <!-- <span class="wow fadeInUp" data-wow-delay="0.6s">作者&nbsp;&nbsp;|&nbsp;&nbsp;Wu</span> -->
   </div>
   <div class="right-area">
     
@@ -146,13 +146,90 @@ var _hmt = _hmt || [];
   
 
   <!-- 文章内容 -->
-  <h5 id="创建个人github账号">创建个人GitHub账号</h5>
+  <h1 id="github-pages-搭建个人博客">GitHub pages 搭建个人博客</h1>
 
-<h5 id="安装rudy">安装Rudy</h5>
+<ul>
+  <li>目录
+    <ul>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#gitbash">gitbash</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="github">GitHub</h2>
+
+<h4 id="创建github账号">创建GitHub账号</h4>
+
+<p><img src="https://i.loli.net/2019/08/13/CGB7Rm45gS1yTuz.png" /></p>
+
+<h4 id="创建github仓库">创建GitHub仓库</h4>
+
+<p><img src="https://i.loli.net/2019/08/13/qa7uBrpZRMCzod2.png" /></p>
+
+<p>填写信息</p>
+
+<p><img src="https://i.loli.net/2019/08/13/5Fz2rGB7lWmTakj.png" /></p>
+
+<h2 id="gitbash">gitbash</h2>
+
+<h4 id="git基础">git基础</h4>
+
+<h6 id="git工作区域">git工作区域</h6>
+
+<p>工作区、暂存区、仓库</p>
+
+<pre><code class="language-flow">
+op1=&gt;operation: 工作区
+op2=&gt;operation: 命令：git add 文件
+op3=&gt;operation: 暂存区
+op4=&gt;operation: 仓库
+op5=&gt;operation: 命令：git commit -m "描述"
+
+op1(right)-&gt;op2(right)-&gt;op3
+
+</code></pre>
+
+<pre><code class="language-flow">op3=&gt;operation: 暂存区
+op4=&gt;operation: 仓库
+op5=&gt;operation: 命令：git commit -m "描述"
+op3(right)-&gt;op5(right)-&gt;op4
+</code></pre>
+
+<p>每一步都可以使用<code class="highlighter-rouge">git -status</code>查看状态，最后使用<code class="highlighter-rouge">git push</code>提交到远程仓库</p>
+
+<h4 id="git配置下载地址">git配置(<a href="https://git-scm.com/">下载地址</a>)</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global user.name "username"    //GitHub用户名
+git config --global user.email "email"      //GitHub邮箱
+git config --list                           //可以查看配置，查看里面的键值对是否正确
+
+cd ~/.ssh                                   //生成ssh令牌
+mkdir key_backup
+ssh-keygen -t rsa -C "*youremail@address*"
+</code></pre></div></div>
+
+<p><img src="https://i.loli.net/2019/08/13/S9DGr3ct1egiw6b.png" alt="image.png" /></p>
+
+<p><code class="highlighter-rouge">d_rsa.pub</code>这个文件是等下进行配置要用到的文件，<code class="highlighter-rouge">cat id_rsa.pub</code>可以显示它的内容，再复制其内容</p>
+
+<p><img src="https://i.loli.net/2019/08/14/wGnCesPvZli7qFA.png" /></p>
+
+<p><img src="https://i.loli.net/2019/08/14/bUoP6h9ekj74Iv1.png" /></p>
+
+<p><code class="highlighter-rouge">ssh -T git@github.com</code>测试连通状态</p>
+
+<p><img src="https://i.loli.net/2019/08/14/AlLvdOp1b8DoneQ.png" /></p>
+
+<h4 id="github-desktop">GitHub Desktop</h4>
+
+<p><img src="https://i.loli.net/2019/08/14/x5y6jCgbIpHEknO.png" /></p>
+
+<p>安装Rudy</p>
 
 <p>#####</p>
 
-<p><a href="http://jekyllthemes.org" target="_blank">jekyll模板</a></p>
+<p><a href="http://jekyllthemes.org" target="_blank" alt="jekyll">jekyll模板</a></p>
 
   <!-- 引入share模块 -->
   
