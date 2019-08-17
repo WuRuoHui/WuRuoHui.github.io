@@ -59,6 +59,7 @@ pygmentsTheme: 'default'
 
 # 友情链接
 friends:
+  GitHub: 'https://github.com'
   知乎: 'https://www.zhihu.com'
   哔哩哔哩: 'https://www.bilibili.com/'
 
