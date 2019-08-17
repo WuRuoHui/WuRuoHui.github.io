@@ -11,8 +11,9 @@ tags: 学习笔记
 - 目录
   - [GitHub](#github)
   - [gitbash](#gitbash)
-
-
+  - [本地部署](#本地部署)  
+  - [写博客](#写博客)
+  
 
 ## GitHub
 
@@ -38,23 +39,10 @@ tags: 学习笔记
 
 工作区、暂存区、仓库
 
-```flow
-
-op1=>operation: 工作区
-op2=>operation: 命令：git add 文件
-op3=>operation: 暂存区
-op4=>operation: 仓库
-op5=>operation: 命令：git commit -m "描述"
-
-op1(right)->op2(right)->op3
-
 ```
+工作区--->暂存区：git add 文件
 
-```flow
-op3=>operation: 暂存区
-op4=>operation: 仓库
-op5=>operation: 命令：git commit -m "描述"
-op3(right)->op5(right)->op4
+暂存区--->仓库：git commit -m "描述"
 ```
 
 每一步都可以使用`git -status`查看状态，最后使用`git push`提交到远程仓库
@@ -123,3 +111,10 @@ jekyll依赖于Rudy，要先安装[Rudy](http://www.ruby-lang.org/en/downloads/ 
 
 <img src="https://i.loli.net/2019/08/15/mM3iXaIlb8ckTDB.png" >
 
+## 写博客
+
+#### MarkDown工具
+
+[Typora](https://typora.io/ "Typora官网")：集写和预览于一身，写的同时可以有预览的效果，不需要分屏查看，所见即所得，支持多种流程图、数学公式等
+
+<img src="https://i.loli.net/2019/08/17/lmIUeXwk2pPbLzT.png" >
