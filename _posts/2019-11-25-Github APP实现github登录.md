@@ -1,3 +1,10 @@
+---
+title: Github APP实现github登录
+layout: post
+author: Wu
+tags: 学习笔记 GitHub APP
+---
+
 # Github APP实现github登录
 
 ### 注册github APP 
