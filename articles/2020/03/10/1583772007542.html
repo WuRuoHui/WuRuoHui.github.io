@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>Struts2 - WuRuoHui 的个人博客</title><meta name="description" content="简介 Struts2 是一个基于 MVC 设计模式的 Web 应用框架，它本质上相当于一个 servlet，在 MVC 设计模式中，Struts2 作为控制器(Controller)来建立模型与视图的数据交互 历史 1.Model1：整个 Web 应用几乎全部由 JSP 页面组成，JSP 页面接受处理客户端请求，对请求处理后直接作出相应。用少量的 JavaBean 来处理数据库连接、数据库访问等操作。代码结构混乱，可重用性低 2.Model2（Servlet+JSP+JavaBean） 3.Struts1：线程不安全、灵活性低、和 ServletAPI 耦合、页面传值麻烦 4.Struts2（Apache Struts + OpenSymphony WebWork2）：struts 的前身是 webwork，前身是 WebWork，与 Struts1 基本没关系 优势 1.自动封装参数 2.参数校验 3.结果的处理（转发 | 重定向） 4.国际化 5.显示待处理页面 6.表单的防止重复提交 核心 Struts2 的核心是拦截器 1.表面上看，拦截器帮我们封装了很多功能 2.拦截器优秀的...."/><meta property="og:description" content="简介 Struts2 是一个基于 MVC 设计模式的 Web 应用框架，它本质上相当于一个 servlet，在 MVC 设计模式中，Struts2 作为控制器(Controller)来建立模型与视图的数据交互 历史 1.Model1：整个 Web 应用几乎全部由 JSP 页面组成，JSP 页面接受处理客户端请求，对请求处理后直接作出相应。用少量的 JavaBean 来处理数据库连接、数据库访问等操作。代码结构混乱，可重用性低 2.Model2（Servlet+JSP+JavaBean） 3.Struts1：线程不安全、灵活性低、和 ServletAPI 耦合、页面传值麻烦 4.Struts2（Apache Struts + OpenSymphony WebWork2）：struts 的前身是 webwork，前身是 WebWork，与 Struts1 基本没关系 优势 1.自动封装参数 2.参数校验 3.结果的处理（转发 | 重定向） 4.国际化 5.显示待处理页面 6.表单的防止重复提交 核心 Struts2 的核心是拦截器 1.表面上看，拦截器帮我们封装了很多功能 2.拦截器优秀的...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="Struts2 - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/03/10/1583772007542.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="Struts2 - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/03/10/1583772007542.html">        <link rel="stylesheet"
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>Struts2 - Wu's Blog</title><meta name="description" content="简介 Struts2 是一个基于 MVC 设计模式的 Web 应用框架，它本质上相当于一个 servlet，在 MVC 设计模式中，Struts2 作为控制器(Controller)来建立模型与视图的数据交互 历史 1.Model1：整个 Web 应用几乎全部由 JSP 页面组成，JSP 页面接受处理客户端请求，对请求处理后直接作出相应。用少量的 JavaBean 来处理数据库连接、数据库访问等操作。代码结构混乱，可重用性低 2.Model2（Servlet+JSP+JavaBean） 3.Struts1：线程不安全、灵活性低、和 ServletAPI 耦合、页面传值麻烦 4.Struts2（Apache Struts + OpenSymphony WebWork2）：struts 的前身是 webwork，前身是 WebWork，与 Struts1 基本没关系 优势 1.自动封装参数 2.参数校验 3.结果的处理（转发 | 重定向） 4.国际化 5.显示待处理页面 6.表单的防止重复提交 核心 Struts2 的核心是拦截器 1.表面上看，拦截器帮我们封装了很多功能 2.拦截器优秀的...."/><meta property="og:description" content="简介 Struts2 是一个基于 MVC 设计模式的 Web 应用框架，它本质上相当于一个 servlet，在 MVC 设计模式中，Struts2 作为控制器(Controller)来建立模型与视图的数据交互 历史 1.Model1：整个 Web 应用几乎全部由 JSP 页面组成，JSP 页面接受处理客户端请求，对请求处理后直接作出相应。用少量的 JavaBean 来处理数据库连接、数据库访问等操作。代码结构混乱，可重用性低 2.Model2（Servlet+JSP+JavaBean） 3.Struts1：线程不安全、灵活性低、和 ServletAPI 耦合、页面传值麻烦 4.Struts2（Apache Struts + OpenSymphony WebWork2）：struts 的前身是 webwork，前身是 WebWork，与 Struts1 基本没关系 优势 1.自动封装参数 2.参数校验 3.结果的处理（转发 | 重定向） 4.国际化 5.显示待处理页面 6.表单的防止重复提交 核心 Struts2 的核心是拦截器 1.表面上看，拦截器帮我们封装了很多功能 2.拦截器优秀的...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="Struts2 - Wu's Blog"/><meta property="og:site_name" content="Wu&#39;s Blog"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/03/10/1583772007542.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="Struts2 - Wu's Blog" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/03/10/1583772007542.html">        <link rel="stylesheet"
               href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
             <link rel="prev" title="Markdown语法" href="https://wuruohui.github.io/articles/2020/03/10/1583771881746.html">
             <link rel="next" title="SpringBoot" href="https://wuruohui.github.io/articles/2020/03/10/1583810068765.html">
@@ -10,8 +10,8 @@
 <header class="header">
     <div class="wrapper">
         <a href="https://wuruohui.github.io" rel="start" class="header__logo">
-            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
-            WuRuoHui 的个人博客
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="Wu's Blog"/>
+            Wu's Blog
         </a>
 
         <nav class="header__nav mobile__none">
@@ -756,7 +756,7 @@ private String photoContentType;
                 <span class="post__code tag tag--7"
                       data-type="wechat"
                       data-title="Struts2"
-                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-blogtitle="Wu's Blog"
                       data-url="https://wuruohui.github.io/articles/2020/03/10/1583772007542.html"
                       data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
                     WeChat
@@ -791,25 +791,24 @@ private String photoContentType;
     <div class="footer__border mobile__none"></div>
     <div class="wrapper fn__flex">
         <div class="fn__flex-1 mobile__none">
-            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <div class="ft__fade">WuRuoHui - 学习笔记</div>
             <br>
-                Open Source, Open Mind, <br/>Open Sight, Open Future!
-
-<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+                格物致知！
         </div>
 
 
         <div class="fn__flex-1 footer__copyright">
             <a class="ft__link" href="https://wuruohui.github.io/archives.html">
-                56
+                55
                 文章
             </a>
            <br>
             <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
  <br>
             &copy; 2021
-            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
-            
+            <a class="ft__link" href="https://wuruohui.github.io">Wu's Blog</a>
+            <br>
+<a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备20019661号</a>
         </div>
     </div>
 </footer>
@@ -884,4 +883,4 @@ Skin.initArticle()
 </body>
 </html>
 
-<!-- Generated by Latke (https://github.com/88250/latke) in 27ms, 2021/02/21 15:59:55 -->
+<!-- Generated by Latke (https://github.com/88250/latke) in 13ms, 2021/02/21 16:29:38 -->
