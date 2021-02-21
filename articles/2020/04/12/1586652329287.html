@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>JDK8新特性 - WuRuoHui 的个人博客</title><meta name="description" content="接口 除了定义全局常量和抽象方法之外，还可以定义静态方法，默认方法 //静态方法 public static void demo(){ } //默认方法，public可以省略 public default void show() { } （1）接口中定义的静态方法，只能用接口来调用 （2）接口中定义的默认方法可通过接口的实现类调用 （3）如果子类（或实现类）继承的父类和实现的接口中声明了同名同参数的方法，那么子类在没有重写此方法的情况下，默认调用的是父类中同名同参数的方法 --&gt; 类优先原则 Lambda表达式 Lambda是一个匿名函数，我们可以把Lambda表达式理解为是一段可以传递的代码（将代码像数据一样传递）。使用它可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使Java的语言表达能力得到了提升。 //常规写法 Comparator&lt;Integer&gt; comparable = new Comparator&lt;Integer&gt;() { @Override public int compare(Integer o1, Integer o2)...."/><meta property="og:description" content="接口 除了定义全局常量和抽象方法之外，还可以定义静态方法，默认方法 //静态方法 public static void demo(){ } //默认方法，public可以省略 public default void show() { } （1）接口中定义的静态方法，只能用接口来调用 （2）接口中定义的默认方法可通过接口的实现类调用 （3）如果子类（或实现类）继承的父类和实现的接口中声明了同名同参数的方法，那么子类在没有重写此方法的情况下，默认调用的是父类中同名同参数的方法 --&gt; 类优先原则 Lambda表达式 Lambda是一个匿名函数，我们可以把Lambda表达式理解为是一段可以传递的代码（将代码像数据一样传递）。使用它可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使Java的语言表达能力得到了提升。 //常规写法 Comparator&lt;Integer&gt; comparable = new Comparator&lt;Integer&gt;() { @Override public int compare(Integer o1, Integer o2)...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="JDK8新特性 - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="JDK8新特性 - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html">        <link rel="stylesheet"
+              href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+            <link rel="prev" title="设计模式" href="https://wuruohui.github.io/articles/2020/04/05/1586093326494.html">
+            <link rel="next" title="IntelliJ IDEA常用配置" href="https://wuruohui.github.io/articles/2020/04/14/1586827240059.html">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body>
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
+
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="post wrapper wrapper--miner">
+        <h2 class="item__title">
+            <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html">
+                JDK8新特性
+            </a>
+        </h2>
+        <div class="ft__fade item__meta">
+                Published on
+            <time>
+                Apr 12, 2020
+            </time>
+            with <span data-uvstaturl="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html">0</span> views
+                and <a href="#b3logsolocomments"><span data-uvstatcmt="1586652329201">0</span> comments</a>
+        </div>
+        <div class="item__tags">
+                <a rel="tag" class="tag tag--0" href="https://wuruohui.github.io/tags/Java">
+                    <b># Java</b>
+                </a>
+                <a rel="tag" class="tag tag--1" href="https://wuruohui.github.io/tags/Java8">
+                    <b># Java8</b>
+                </a>
+                <a rel="tag" class="tag tag--2" href="https://wuruohui.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+                    <b># 学习笔记</b>
+                </a>
+        </div>
+        <div class="vditor-reset">
+            <h2 id="toc_h2_0">接口</h2>
+<p>除了定义全局常量和抽象方法之外，还可以定义静态方法，默认方法</p>
+<pre><code class="language-java">//静态方法
+public static void demo(){
+}
+
+//默认方法，public可以省略
+public default void show() {
+}
+</code></pre>
+<p>（1）接口中定义的静态方法，只能用接口来调用</p>
+<p>（2）接口中定义的默认方法可通过接口的实现类调用</p>
+<p>（3）如果子类（或实现类）继承的父类和实现的接口中声明了同名同参数的方法，那么子类在没有重写此方法的情况下，默认调用的是父类中同名同参数的方法 --&gt; 类优先原则</p>
+<h2 id="toc_h2_1">Lambda表达式</h2>
+<p>Lambda是一个匿名函数，我们可以把Lambda表达式理解为是一段可以传递的代码（将代码像数据一样传递）。使用它可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使Java的语言表达能力得到了提升。</p>
+<pre><code>	//常规写法
+	Comparator&lt;Integer&gt; comparable = new Comparator&lt;Integer&gt;() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1,o2);
+            }
+        };
+	//Lambda表达式
+        Comparator&lt;Integer&gt; comparable = (o1, o2) -&gt; Integer.compare(o1,o2);
+</code></pre>
+<h3 id="toc_h3_2">Lambda表达式的使用</h3>
+<p>举例：(o1, o2) -&gt; Integer.compare(o1,o2);</p>
+<p>-&gt; ：lambda操作符或箭头操作符<br>
+-&gt;左边：lambda形参列表（其实就是接口中抽象方法的形参列表）<br>
+-&gt;右边：lambda体（其实就是重写的抽象方法的方法体）</p>
+<p>Lambda表达式的本质：作为函数式接口的实例（若一个接口中只声明一个抽象方法，则此接口为函数式接口）</p>
+<h4 id="toc_h4_3">语法格式一：无参，无返回值</h4>
+<pre><code class="language-java">	//常规写法
+	Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("hei");
+            }
+        };
+
+	//lambda表达式
+        Runnable runnable = () -&gt; {System.out.println("hei");};
+</code></pre>
+<h4 id="toc_h4_4">语法格式二：Lambda需要一个参数，但是没有返回值</h4>
+<pre><code class="language-java">	//常规写法
+	Consumer&lt;String&gt; consumer = new Consumer&lt;String&gt;() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        };
+	//Lambda表达式
+        Consumer&lt;String&gt; consumer = （String s) -&gt; {System.out.println(s);};
+</code></pre>
+<h4 id="toc_h4_5">语法格式三：数据类型可以省略，因为可由编译器推断出，称为“类型推断”</h4>
+<pre><code class="language-java">	//语法格式二
+	Consumer&lt;String&gt; consumer = （String s) -&gt; {System.out.println(s);};
+
+	//类型推断，省略了数据类型
+        Consumer&lt;String&gt; consumer = (s) -&gt; {System.out.println(s);};
+</code></pre>
+<h4 id="toc_h4_6">语法格式四：Lambda若只要一个参数时，参数的小括号可以省略</h4>
+<pre><code class="language-java">	//语法格式三
+	Consumer&lt;String&gt; consumer = （String s) -&gt; {System.out.println(s);};
+
+	//若只要一个参数时，参数的小括号可以省略
+        Consumer&lt;String&gt; consumer = s -&gt; {System.out.println(s);};
+</code></pre>
+<h4 id="toc_h4_7">语法格式五：Lambda需要两个或者以上参数，多条执行语句，并且可以有返回值</h4>
+<pre><code class="language-java">	//常规写法
+	Comparator&lt;Integer&gt; comparable = new Comparator&lt;Integer&gt;() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                System.out.println("begin");
+                return Integer.compare(o1,o2);
+            }
+        };
+	//多个参数时括号不可省略，方法体多条执行语句
+        Comparator&lt;Integer&gt; comparable = (o1, o2) -&gt; {
+            System.out.println("begin");
+            return Integer.compare(o1,o2);
+        };
+</code></pre>
+<h4 id="toc_h4_8">语法格式六：当Lambda体只有一条语句时，return和大括号若有，都可以省略</h4>
+<pre><code class="language-java">	//常规写法
+	Comparator&lt;Integer&gt; comparator = new Comparator&lt;Integer&gt;() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        };
+	//Lambda表达式，return和大括号均省略
+        Comparator&lt;Integer&gt; comparator = (o1, o2) -&gt; o1.compareTo(o2);
+</code></pre>
+<p>总结：</p>
+<p>（1）-&gt;左边：lambda形参列表的参数类型可以省略（类型推断）；如果形参列表只有一个参数，其一对小括号可以省略<br>
+（2）-&gt;右边：lambda体应该使用一对{}包裹；如果lambda体只有一条执行语句（可能是return语句），那么可以省略这一对{}和return关键字</p>
+<h2 id="toc_h2_9">函数式接口</h2>
+<p>只包含一个抽象方法的接口，称为函数式接口</p>
+<p>可通过Lambda表达式来创建该接口的对象。（若Lambda表达式抛出一个受检异常（即非运行时异常），那么该异常需要在目标接口的抽象方法上声明）</p>
+<p>可以在一个接口上使用@FunctionalInterface注解，这样做可以检查它是否是一个函数式接口。同时javadoc也会包含一条声明，说明这个接口是函数式接口</p>
+<p>在java.util.function包定义了Java8的丰富的函数式接口</p>
+<p><img src="https://img.hacpai.com/file/2020/05/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A72020050122.42.46-52058a12.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="屏幕快照2020050122.42.46.png"></p>
+<h2 id="toc_h2_10">方法引用和构造器引用</h2>
+<h3 id="toc_h3_11">方法引用</h3>
+<p>当要传递给Lambda体的操作，已经有实现的方法了，可以使用方法引用</p>
+<p>方法引用可以看做是Lambda表达式的深层是的表达。换句话说，方法引用就是Lambda的表达式，也就是函数式接口的一个实例，通过方法的名字来指向一个方法，可以认为是Lambda表达式的一个语法糖。</p>
+<p>要求：实现接口的抽象方法的参数列表和返回值类型，必须与方法引用的方法的参数列表和返回值类型保持一致！</p>
+<p>格式：使用操作符“::”将类（或者对象）与方法名分隔开来</p>
+<p>如下三种主要使用情况：</p>
+<ul>
+<li>对象::实例方法名</li>
+<li>类::静态方法名</li>
+<li>类::实例方法名</li>
+</ul>
+<h4 id="toc_h4_12">情况一：对象::实例方法</h4>
+<pre><code class="language-java">	//Consumer中的void accept(T t)
+        //PrintStream中的void println(T t)
+        Consumer&lt;String&gt; consumer = s -&gt; System.out.println(s);
+	consumer.accept("hei");
+        //改写
+        PrintStream printStream = System.out;
+        Consumer&lt;String&gt; con = printStream::println;
+        con.accept("hei");
+</code></pre>
+<h4 id="toc_h4_13">情况二：类::静态方法</h4>
+<pre><code class="language-java">	//Comparator中的int compare(T t1,T t2)
+        //Integer中的int compare(T t1, T t2)
+
+        Comparator&lt;Integer&gt; comparator = (o1, o2) -&gt; Integer.compare(o1,o2);
+        //改写
+        Comparator&lt;Integer&gt; comparator1 = Integer::compare;
+</code></pre>
+<h4 id="toc_h4_14">情况三：类::实例方法</h4>
+<pre><code class="language-java">	//Comparator中的int compare(T t1,T t2)
+        //String中的int t1.compareTo(t2)
+        Comparator&lt;String&gt; comparator = (o1, o2) -&gt; o1.compareTo(o2);
+        //改写：当参数1 o1作为方法的调用者出现时可以使用
+        Comparator&lt;String&gt; comparator1 = String::compareTo;
+</code></pre>
+<h3 id="toc_h3_15">构造器引用</h3>
+<p>和方法引用类似，函数式接口的抽象方法的形参列表和构造器的形参列表一致<br>
+抽象方法的返回值类型即为构造器所属的类的类型</p>
+<pre><code class="language-java">	BiFunction&lt;Integer,String, Person&gt; biFunction = (integer, s) -&gt; new Person();
+        //构造器引用
+        BiFunction&lt;Integer,String, Person&gt; biFunction = Person::new;
+</code></pre>
+<h3 id="toc_h3_16">数组引用</h3>
+<p>可以把数组看做是一个特殊的类，则写法与构造器引用一致</p>
+<pre><code class="language-java">	Function&lt;Integer,String[]&gt; function = length -&gt; new String[length];
+
+        Function&lt;Integer,String[]&gt; function = String[]:: new;
+</code></pre>
+<h2 id="toc_h2_17">Stream API</h2>
+<p>Stream是数据取到，用于操作数据源（集合、数组）所生成的元素序列</p>
+<p>“集合讲的是数据，Stream讲的是计算”</p>
+<p>注意：</p>
+<p>（1）Stream自己不会存储元素<br>
+（2）Stream不会改变源对象。相反，它们会返回一个持有结果的新Stream<br>
+（3）Stream操作是延迟执行的。这意味着他们会等到需要结果的时候才执行</p>
+<h3 id="toc_h3_18">Stream的操作步骤</h3>
+<p>1.创建Stream</p>
+<p>一个数据源（如：集合、数组），获取一个流</p>
+<p>2.中间操作</p>
+<p>一个中间操作链，对数组的数据进行处理</p>
+<p>3.终止操作</p>
+<p>一旦执行终止操作，就执行中间操作链，并产生结果。之后不会再被使用</p>
+<h4 id="toc_h4_19">创建Stream的方式</h4>
+<h5 id="toc_h5_20">方式一：通过集合</h5>
+<p>default Stream<e> stream()：返回一个顺序流</e></p>
+<p>default Stream<e> parallelStream()：返回一个并行流</e></p>
+<pre><code>	List&lt;Integer&gt; list = Arrays.asList(3,1,2);
+        Stream&lt;Integer&gt; stream = list.stream();
+
+        Stream&lt;Integer&gt; integerStream = list.parallelStream();
+</code></pre>
+<h5 id="toc_h5_21">方式二：通过数组</h5>
+<p>Java8中的Arrays的静态方法stream()可以获得数组流</p>
+<p>static <t> Stream<t> stram(T[] array)：返回一个流</t></t></p>
+<p>重载形式，能够处理对应基本类型的数组</p>
+<p>public static IntStream stream(int[] array)</p>
+<p>public static LongStream stram(long[] array)</p>
+<p>public static DoubleStream stream(double[] array)</p>
+<pre><code class="language-java">        IntStream stream = Arrays.stream(new int[]{2, 1, 3});
+</code></pre>
+<h5 id="toc_h5_22">方式三：通过Stream的of()</h5>
+<p>可以调用Stream类的静态方法of()，通过显示值创建一个流。ta 可以接收任意数量的参数</p>
+<p>public static<t> Stream<t> of(T... values)：返回一个流</t></t></p>
+<pre><code class="language-java">        Stream&lt;Integer&gt; integerStream = Stream.of(3, 1, 2);
+
+</code></pre>
+<h5 id="toc_h5_23">方式四：创建无限流</h5>
+<p>可以使用静态方法Stream.iterate()和Stram.generate()，创建无限流</p>
+<ul>
+<li>迭代</li>
+</ul>
+<p>public static<t> Stream<t> iterate(final T seed,final UnaryOperator<t> f)</t></t></t></p>
+<ul>
+<li>生成</li>
+</ul>
+<p>public static<t> Stream<t> generate(Supplier<t> s)</t></t></t></p>
+<pre><code>	//遍历前10个偶数
+        Stream.iterate(0, i -&gt; i+2).limit(10).forEach(System.out::println);
+
+        //获得10个随机数
+        Stream.generate(Math::random).limit(10).forEach(System.out::println);
+</code></pre>
+<h4 id="toc_h4_24">Stream的中间操作</h4>
+<p>多个中间操作可以连接起来形成一个流水线，除非流水线上触发终止操作，否则中间操作不会执行任何的处理！而在终止操作时一次性全部处理，称为“惰性求值”。</p>
+<p>1.筛选与切片</p>
+<p>（1）filter(Predicate p)：接收Lambda，从流中排除某些元素</p>
+<pre><code class="language-java">        List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+        list.add(new Person(18,"wu"));
+        list.add(new Person(20,"ruo"));
+        list.add(new Person(35,"h"));
+        list.add(new Person(45,"u"));
+
+        Stream&lt;Person&gt; stream = list.stream();
+	//查询年龄小于35的person
+        stream.filter( person -&gt; person.getAge() &lt;35).forEach(System.out::println);
+</code></pre>
+<p>（2）distinct()：筛选，通过流所生成的hashcode()和equals()去除重复元素</p>
+<pre><code class="language-java">	list.add(new Person(45,"u"));
+        list.stream().distinct().forEach(System.out::println);
+</code></pre>
+<p>（3）limit(long maxSize)：截断流，使其元素不超过给定值</p>
+<pre><code class="language-java">        list.stream().limit(3).forEach(System.out::println);
+</code></pre>
+<p>（4）skip(long n)：跳过元素，返回一个扔掉了前n个元素的流。若流中元素不足n个，则返回一个空流。与limit(n)互补</p>
+<pre><code class="language-java">	//跳过前3个
+        list.stream().skip(3).forEach(System.out::println);
+</code></pre>
+<p>2.映射</p>
+<p>（1）map(Function f)：接收一个函数作为参数，该函数会被应用到每个元素上，并映射成一个新的元素</p>
+<pre><code class="language-java">	//将list中的字母转换为大写
+	List&lt;String&gt; stringList = Arrays.asList("aa", "bb", "cc");
+        stringList.stream().map(s -&gt; s.toUpperCase()).forEach(System.out::println);
+	//获取名字长度大于1的person的名字
+        list.stream().map(Person::getName).filter(name -&gt; name.length() &gt; 1).forEach(System.out::println);
+</code></pre>
+<p>（2）map ToDouble(ToDoubleFunction f)：接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的DoubleStream<br>
+（3）map ToInt(ToIntFunction f)：接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的IntStream<br>
+（4）map ToLong(ToLongFunction f)：接收一个函数作为参数，该函数会被应用到每个元素上，产生一个新的LongStream<br>
+（5）flatMap(Function f)：接收一个函数作为参数，将流中的每个值替换成另一个流，然后将所有的流连接成一个流</p>
+<pre><code>public class StreamTest {
+    public static void main(String[] args) {
+        List&lt;String&gt; stringList = Arrays.asList("aa", "bb", "cc");
+        Stream&lt;Stream&lt;Character&gt;&gt; streamStream = stringList.stream().map(StreamTest::fromStringToStream);
+        streamStream.forEach(s -&gt; {
+            s.forEach(System.out::println);
+        });
+        //采用flatMap() -&gt;该方法与list中的addAll()类似
+        stringList.stream().flatMap(StreamTest::fromStringToStream).forEach(System.out::println);
+    }
+
+    public static Stream&lt;Character&gt; fromStringToStream(String str) {
+        List&lt;Character&gt; list = new ArrayList&lt;&gt;();
+        for (Character s : str.toCharArray()) {
+            list.add(s);
+        }
+        return list.stream();
+    }
+}
+</code></pre>
+<p>3.排序</p>
+<p>（1）sorted()：产生一个新流，其中按自然顺序排序</p>
+<pre><code class="language-java">        List&lt;Integer&gt; integerList = Arrays.asList(2,4,5,-1,23,44,33);
+        integerList.stream().sorted().forEach(System.out::println);
+</code></pre>
+<p>（2）sorted(Comparator com)：产生一个新流，其中按比较器顺序排序</p>
+<pre><code class="language-java">	List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+        list.add(new Person(18, "wu"));
+        list.add(new Person(20, "ruo"));
+        list.add(new Person(35, "h"));
+        list.add(new Person(45, "u"));
+
+        list.stream().sorted((p1,p2) -&gt; Integer.compare(p1.getAge(),p2.getAge())).forEach(System.out::println);
+	//方法引用，Person中有compareTo()方法
+        list.stream().sorted(Person::compareTo).forEach(System.out::println);
+</code></pre>
+<h4 id="toc_h4_25">终止操作</h4>
+<p>终端操作会从流的流水线生成结果。其结果可以是任何不是流的值，例如：List、Integer，甚至是void</p>
+<p>流进行了终止操作后，不能再次使用</p>
+<p>1.匹配与查找</p>
+<p>（1）allMatch(Predicate p)：检查是否匹配所有元素</p>
+<pre><code class="language-java">	//是否所有的person年龄都大于25
+        boolean allMatch = list.stream().allMatch(person -&gt; person.getAge() &gt; 25);
+        System.out.println(allMatch);
+</code></pre>
+<p>（2）anyMatch(Predicate p)：检查是否至少匹配一个元素</p>
+<pre><code class="language-java">	//至少有一个person的年龄大于25
+        boolean anyMatch = list.stream().anyMatch(person -&gt; person.getAge() &gt; 25);
+        System.out.println(anyMatch);
+</code></pre>
+<p>（3）noneMatch(Predicate p)：检查是否没有匹配所有元素</p>
+<pre><code class="language-java">	//不存在员工名字长度大于4
+        boolean noneMatch = list.stream().noneMatch(person -&gt; person.getName().length() &gt; 4);
+        System.out.println(noneMatch);
+</code></pre>
+<p>（4）findFirst()：返回第一个元素</p>
+<pre><code class="language-java">        Optional&lt;Person&gt; first = list.stream().findFirst();
+        System.out.println(first);
+</code></pre>
+<p>（5）findAny()：返回当前流中的任意元素</p>
+<pre><code class="language-java">        Optional&lt;Person&gt; any = list.parallelStream().findAny();
+        System.out.println(any);
+</code></pre>
+<p>（6）count()：返回流中元素的总个数</p>
+<pre><code class="language-java">        long count = list.stream().count();
+        System.out.println(count);
+</code></pre>
+<p>（7）max(Comparaotr c)：返回流中最大值</p>
+<pre><code class="language-java">	//返回最高年龄
+        Stream&lt;Integer&gt; integerStream = list.stream().map(person -&gt; person.getAge());
+        Optional&lt;Integer&gt; max = integerStream.max(Integer::compare);
+        System.out.println(max);
+</code></pre>
+<p>（8）min(Cimparator c)：返回流中最小值</p>
+<pre><code class="language-java">	//返回年龄最小的person
+        Optional&lt;Person&gt; min = list.stream().min(Person::compareTo);
+        System.out.println(min);
+</code></pre>
+<p>（9）forEach(Consumer c)：内部迭代</p>
+<pre><code>        list.stream().forEach(System.out::println);
+</code></pre>
+<p>2.归约</p>
+<p>（1）reduce(T identity, BinaryOperator b)：可以将流中元素反复结合起来，得到一个值，返回T</p>
+<pre><code class="language-java">	//计算1到5的和
+        List&lt;Integer&gt; integerList = Arrays.asList(1, 2, 3, 4, 5);
+        Integer reduce = integerList.stream().reduce(0, Integer::sum);
+        System.out.println(reduce);
+</code></pre>
+<p>（2）reduce(BinaryOperator b)：可以将流中元素反复结合起来，得到一个值，返回Optional<t></t></p>
+<pre><code class="language-java">	//返回年龄总和
+        Stream&lt;Integer&gt; integerStream = list.stream().map(Person::getAge);
+        Optional&lt;Integer&gt; sumAge = integerStream.reduce(Integer::sum);
+        System.out.println(sumAge);
+</code></pre>
+<p>3.收集</p>
+<p>collect(Collector c)：将流转换为其他形式，接收一个Collector接口的实现，用于给stream中元素做汇总的方法</p>
+<p>Collector接口中方法的实现决定了如何对流执行收集的操作（如收集到List、Set、Map）<br>
+另外，Collectors实用类提供了很多静态方法，可以方便地创建常见收集器实例，如下：<img src="https://img.hacpai.com/file/2020/05/屏幕快照2020050322.12.42-01a9e56c.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="屏幕快照2020050322.12.42.png"></p>
+<pre><code class="language-java">	//获取年龄大于35的person并且转化为list
+        List&lt;Person&gt; personList = list.stream().filter(person -&gt; person.getAge() &gt; 35).collect(Collectors.toList());
+        System.out.println(personList);
+</code></pre>
+<h2 id="toc_h2_26">Optional类</h2>
+<p>到目前为止，臭名昭著的空指针异常时导致Java应用程序失败的最常见原因。以前为了解决空指针异常，Google公司著名的Guava项目引进了Optional类，Guava通过检查空值的方式来防止代码污染，它鼓励程序员写更干净的代码。受到Google Guava的启发，Optional类已经成为了Java8的一部分。</p>
+<p>Optional<t>类（java.util.Optional）是一个容器类，它可以保存类型T的值，代表这个值真的存在。或者仅仅保持null，表示这个值不存在。原来用null表示一个值不存在，现在Optional可以更好地表达这个概念。并且可以避免空指针异常。</t></p>
+<p>Optional类的Javadoc描述如下：这是一个可以为null的容器对象。如果值存在，则isParent()方法会返回true，调用get()方法会返回该对象。</p>
+<p>1.创建Optional类对象的方法</p>
+<p>（1）Optional.of(T t)：创建一个Optinal实例，t必须为非空</p>
+<pre><code class="language-java">	//of(T t)：保证t不为空
+	Person person = new Person(10, "wu");
+        Optional&lt;Person&gt; personOptional = Optional.of(person);
+        System.out.println(personOptional);
+</code></pre>
+<p>（2）Optional.empty()：创建一个空的Optional实例</p>
+<p>（3）Optional.ofNullable(T t)：t可以为null</p>
+<pre><code class="language-java">public class OptionalTest {
+    public static void main(String[] args) {
+        Person person = new Person(10, "wu");
+        System.out.println(getAnimalName(person));
+    }
+
+    public static String getAnimalName(Person person) {
+        Optional&lt;Person&gt; personOptional = Optional.ofNullable(person);
+        Person p = personOptional.orElse(new Person(new Animal("cat")));
+        Animal animal = p.getAnimal();
+        Optional&lt;Animal&gt; animalOptional = Optional.ofNullable(animal);
+        Animal a = animalOptional.orElse(new Animal("dog"));
+        return a.getName();
+    }
+}
+</code></pre>
+<p>2.判断Optional容器中是否包含对象：</p>
+<p>（1）boolean isParent()：判断是否包含对象<br>
+（2）void ifPresent(Cinsumer&lt;? super T&gt; consumer)：如果有值，就执行Comsumer</p>
+<p>3.获得Optional容器的对象</p>
+<p>（1）T get()：如果对象包含值，则返回该值，否则抛异常<br>
+（2）T orElse(T other)：如果有值则将其返回，否则返回指定的other对象<br>
+（3）T orElseGet(Supplier&lt;? extends T&gt; other)：如果有值则将其返回，否则返回由Supplier接口实现提供的对象<br>
+（4）T orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)：如果有值，则将其返回，否则抛出由Supplier接口实现提供的异常</p>
+                <div>
+                    <hr>
+
+标题：JDK8新特性<br>
+作者：<a href="https://wuruohui.github.io" target="_blank">WuRuoHui</a><br>
+地址：<a href="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html" target="_blank">https://wuruohui.github.io/articles/2020/04/12/1586652329287.html</a><br>
+
+<!-- 签名档内可使用 HTML、JavaScript -->
+<br>
+                </div>
+        </div>
+    </div>
+    <div class="post__toc">
+<ul class="article__toc">
+        <li class="toc__h2">
+            <a href="#toc_h2_0">接口</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_1">Lambda表达式</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_2">Lambda表达式的使用</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_3">语法格式一：无参，无返回值</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_4">语法格式二：Lambda需要一个参数，但是没有返回值</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_5">语法格式三：数据类型可以省略，因为可由编译器推断出，称为“类型推断”</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_6">语法格式四：Lambda若只要一个参数时，参数的小括号可以省略</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_7">语法格式五：Lambda需要两个或者以上参数，多条执行语句，并且可以有返回值</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_8">语法格式六：当Lambda体只有一条语句时，return和大括号若有，都可以省略</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_9">函数式接口</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_10">方法引用和构造器引用</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_11">方法引用</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_12">情况一：对象::实例方法</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_13">情况二：类::静态方法</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_14">情况三：类::实例方法</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_15">构造器引用</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_16">数组引用</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_17">Stream API</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_18">Stream的操作步骤</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_19">创建Stream的方式</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_20">方式一：通过集合</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_21">方式二：通过数组</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_22">方式三：通过Stream的of()</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_23">方式四：创建无限流</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_24">Stream的中间操作</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_25">终止操作</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_26">Optional类</a>
+        </li>
+</ul>    </div>
+    <div class="body--gray post__gray">
+        <div class="wrapper comment">
+                <div id="gitalk-container" style="padding: 30px 0;"></div>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="padding: 30px 0;" data-name="WuRuoHui" data-postId="1586652329201"></div>
+
+            <div class="post__list fn__flex">
+                <div class="fn__flex-1">
+                    <div id="externalRelevantArticles"></div>
+                </div>
+                <div class="post__list-mid fn__flex-1">
+                    <div id="randomArticles"></div>
+                </div>
+                <div class="fn__flex-1">
+                    <div id="relevantArticles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__fix">
+        <div class="wrapper">
+            <span class="post__share mobile__none">
+                Share
+                <span class="tag tag--4" data-type="weibo">WeiBo</span>
+                <span class="tag tag--5" data-type="twitter">Twitter</span>
+                <span class="tag tag--6" data-type="qqz">QZone</span>
+                <span class="post__code tag tag--7"
+                      data-type="wechat"
+                      data-title="JDK8新特性"
+                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-url="https://wuruohui.github.io/articles/2020/04/12/1586652329287.html"
+                      data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                    WeChat
+                    <span class="qrcode"></span>
+                </span>
+            </span>
+            <span class="post__arrow">
+                    <a href="https://wuruohui.github.io/articles/2020/04/05/1586093326494.html" rel="prev"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="设计模式"
+                       aria-label="旧一篇: 设计模式">←</a>
+
+                    <a href="https://wuruohui.github.io/articles/2020/04/14/1586827240059.html" rel="next"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="IntelliJ IDEA常用配置"
+                       aria-label="新一篇: IntelliJ IDEA常用配置">→</a>
+                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到顶部">↑</a>
+                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到底部">↓</a>
+            </span>
+        </div>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+    articleId: "1586652329201",
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    Util.addScript('https://wuruohui.github.io/js/page.min.js?1613894294256', 'soloPageScript')
+    var page = new Page({
+        "commentContentCannotEmptyLabel": "评论不能为空",
+        "oId": "1586652329201",
+        "blogHost": "https://wuruohui.github.io",
+        "randomArticles1Label": "随机阅读：",
+        "externalRelevantArticles1Label": "站外相关阅读："
+    });
+    $(document).ready(function () {
+        page.load();
+    page.tips.externalRelevantArticlesDisplayCount = "0";
+    page.loadRandomArticles('<h3>RECOMMEND POSTS</h3>');
+    page.loadRelevantArticles('1586652329201', '<h3>RELEVANT POSTS</h3>');
+Skin.initArticle()
+    });
+</script>
+
+</body>
+</html>
+
+<!-- Generated by Latke (https://github.com/88250/latke) in 12ms, 2021/02/21 15:59:55 -->

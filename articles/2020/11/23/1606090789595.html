@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>Spring Boot与日志 - WuRuoHui 的个人博客</title><meta name="description" content="市面上的日志框架：JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j... | 日志门面 （日志的抽象层） | 日志实现 | | - | - | | JCL（Jakarta Commons Logging） SLF4j（Simple Logging Facade for Java） jboss-logging | Log4j JUL（java.util.logging） Log4j2 Logback | 左边选一个门面（抽象层）、右边来选一个实现； 日志门面： SLF4J； 日志实现：Logback； SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL； SpringBoot 选用 SLF4j 和 logback SLF4j 的使用 如何在系统中使用 SLF4j 开发时，日志记录方法的调用，不应该调用日志类的实现类，而是调用日志抽象层的方法 给系统里面导入 slf4j 的 jar 和 logback 的实现 jar import org.slf4j.Logger; import org.slf4j.Logg...."/><meta property="og:description" content="市面上的日志框架：JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j... | 日志门面 （日志的抽象层） | 日志实现 | | - | - | | JCL（Jakarta Commons Logging） SLF4j（Simple Logging Facade for Java） jboss-logging | Log4j JUL（java.util.logging） Log4j2 Logback | 左边选一个门面（抽象层）、右边来选一个实现； 日志门面： SLF4J； 日志实现：Logback； SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL； SpringBoot 选用 SLF4j 和 logback SLF4j 的使用 如何在系统中使用 SLF4j 开发时，日志记录方法的调用，不应该调用日志类的实现类，而是调用日志抽象层的方法 给系统里面导入 slf4j 的 jar 和 logback 的实现 jar import org.slf4j.Logger; import org.slf4j.Logg...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="Spring Boot与日志 - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="Spring Boot与日志 - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html">        <link rel="stylesheet"
+              href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+            <link rel="prev" title="Spring Boot之配置" href="https://wuruohui.github.io/articles/2020/11/20/1605886055349.html">
+            <link rel="next" title="Spring Boot与Web" href="https://wuruohui.github.io/articles/2020/11/26/1606349708094.html">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body>
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
+
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="post wrapper wrapper--miner">
+        <h2 class="item__title">
+            <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html">
+                Spring Boot与日志
+            </a>
+        </h2>
+        <div class="ft__fade item__meta">
+                Published on
+            <time>
+                Nov 23, 2020
+            </time>
+            with <span data-uvstaturl="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html">0</span> views
+                and <a href="#b3logsolocomments"><span data-uvstatcmt="1606090789229">0</span> comments</a>
+        </div>
+        <div class="item__tags">
+                <a rel="tag" class="tag tag--0" href="https://wuruohui.github.io/tags/SpringBoot">
+                    <b># SpringBoot</b>
+                </a>
+                <a rel="tag" class="tag tag--1" href="https://wuruohui.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+                    <b># 学习笔记</b>
+                </a>
+        </div>
+        <div class="vditor-reset">
+            <p>市面上的日志框架：JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j...</p>
+<p>| 日志门面 （日志的抽象层） | 日志实现 |<br>
+| - | - |<br>
+| <del>JCL（Jakarta Commons Logging）</del> SLF4j（Simple  Logging Facade for Java） <del>jboss-logging</del> | Log4j JUL（java.util.logging） Log4j2 Logback |</p>
+<p>左边选一个门面（抽象层）、右边来选一个实现；</p>
+<p>日志门面： SLF4J；</p>
+<p>日志实现：Logback；</p>
+<p>SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL；</p>
+<p><strong>SpringBoot 选用 SLF4j 和 logback</strong></p>
+<h4 id="toc_h4_0">SLF4j 的使用</h4>
+<h5 id="toc_h5_1">如何在系统中使用 SLF4j</h5>
+<p>开发时，日志记录方法的调用，不应该调用日志类的实现类，而是调用日志抽象层的方法</p>
+<p>给系统里面导入 slf4j 的 jar 和 logback 的实现 jar</p>
+<pre><code class="language-java">import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    Logger logger = LoggerFactory.getLogger(HelloWorld.class);
+    logger.info("Hello World");
+  }
+}
+</code></pre>
+<p><img src="https://b3logfile.com/file/2020/11/image-c95ce111.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<p>每一个日志的实现框架都有自己的配置文件。使用 slf4j 以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
+<h5 id="toc_h5_2">遗留问题</h5>
+<p>a（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
+<p>统一日志记录，即使是别的框架和我一起统一使用 slf4j 进行输出？</p>
+<p><strong>如何让系统中所有的日志都统一到 slf4j；</strong></p>
+<ol>
+<li>将系统中其他日志框架先排除出去；</li>
+<li>用中间包来替换原有的日志框架；</li>
+<li>我们导入 slf4j 其他的实现</li>
+</ol>
+<p><img src="https://img.hacpai.com/file/2019/09/legacy-363baa25.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt=""></p>
+<h5 id="toc_h5_3">SpringBoot 的日志关系</h5>
+<p>SpringBoot 使用它来做日志功能；</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+		&lt;/dependency&gt;
+</code></pre>
+<p>底层依赖关系</p>
+<p><img src="https://b3logfile.com/file/2020/11/image-9b7473d5.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<p>总结：</p>
+<ol>
+<li>、SpringBoot 底层也是使用 slf4j+logback 的方式进行日志记录</li>
+<li>、SpringBoot 也把其他的日志都替换成了 slf4j；</li>
+<li>、中间替换包？</li>
+</ol>
+<pre><code class="language-java">@SuppressWarnings("rawtypes")
+public abstract class LogFactory {
+
+    static String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = "http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j";
+
+    static LogFactory logFactory = new SLF4JLogFactory();
+</code></pre>
+<p><img src="https://b3logfile.com/file/2020/11/image-e7b71a4a.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<ol start="4">
+<li>如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？</li>
+</ol>
+<pre><code>Spring 框架用的是 commons-logging；
+</code></pre>
+<pre><code class="language-xml">&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+			&lt;exclusions&gt;
+				&lt;exclusion&gt;
+					&lt;groupId&gt;commons-logging&lt;/groupId&gt;
+					&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+				&lt;/exclusion&gt;
+			&lt;/exclusions&gt;
+		&lt;/dependency&gt;
+</code></pre>
+<p><strong>SpringBoot 能自动适配所有的日志，而且底层使用 slf4j+logback 的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可；</strong></p>
+<h4 id="toc_h4_4">日志使用</h4>
+<p>Spring 默认帮我们配置好了日志</p>
+<pre><code>//记录器
+Logger logger = LoggerFactory.getLogger(getClass());
+@Test
+void contextLoads() {
+    //日志级别，由低到高trace &lt; debug &lt; info &lt; warn &lt; error
+    //可以调整日志的输出级别，就只会输出在此级别以及高级别的日志
+    logger.trace("trace");
+    logger.debug("debug");
+    //spring默认给我们使用的是info级别，没有指定级别的就用SpringBoot默认规定的级别：root级别
+    logger.info("info");
+    logger.warn("warn");
+    logger.error("error");
+    System.out.println(person);
+}
+</code></pre>
+<p>SpringBoot 修改日志的默认配置</p>
+<pre><code class="language-properties">logging.level.com.wu.springbootdemo=trace
+
+#logging.path=
+#指定日志输出的文件名，可以指定完整路径，springboot2.2前的是logging.file
+#logging.file.name=G:/spring.log
+#在当前磁盘的根路径下创建spring文件夹和里面的log文件夹，使用spring.log作为默认文件，springboot2.2前是logging.path
+#logging.file.path=/spring/log
+
+#在控制台输出的日志的格式
+logging.pattern.console=%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n
+#指定文件中日志输出的格式
+logging.pattern.file=%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n
+</code></pre>
+<p>日志输出格式</p>
+<pre><code>%d表示日期时间，
+%thread表示线程名，
+%-5level：级别从左显示5个字符宽度
+%logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+%msg：日志消息，
+%n是换行符
+
+%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+</code></pre>
+<h5 id="toc_h5_5">指定配置文件</h5>
+<p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot 就不使用他默认配置的了</p>
+<p>| Logging System | Customization |<br>
+| - | - |<br>
+| Logback | <code>logback-spring.xml</code>, <code>logback-spring.groovy</code>, <code>logback.xml</code> or <code>logback.groovy</code> |<br>
+| Log4j2 | <code>log4j2-spring.xml</code> or <code>log4j2.xml</code> |<br>
+| JDK (Java Util Logging) | <code>logging.properties</code> |</p>
+<p>logback.xml：直接就被日志框架识别了；</p>
+<p><strong>logback-spring.xml</strong>：日志框架就不直接加载日志的配置项，由 SpringBoot 解析日志配置，可以使用 SpringBoot 的高级 Profile 功能（带 Spring 的才能使用高级功能）</p>
+<pre><code>&lt;springProfile name="staging"&gt;
+    &lt;!-- configuration to be enabled when the "staging" profile is active --&gt;
+  	可以指定某段配置只在某个环境下生效
+&lt;/springProfile&gt;
+</code></pre>
+<p>例子：</p>
+<pre><code>&lt;appender name="stdout" class="ch.qos.logback.core.ConsoleAppender"&gt;
+    &lt;!--
+    日志输出格式：
+		%d表示日期时间，
+		%thread表示线程名，
+		%-5level：级别从左显示5个字符宽度
+		%logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+		%msg：日志消息，
+		%n是换行符
+    --&gt;
+    &lt;layout class="ch.qos.logback.classic.PatternLayout"&gt;
+        &lt;springProfile name="dev"&gt;
+            &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ----&gt; [%thread] ---&gt; %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+        &lt;/springProfile&gt;
+        &lt;springProfile name="!dev"&gt;
+            &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ==== [%thread] ==== %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+        &lt;/springProfile&gt;
+    &lt;/layout&gt;
+&lt;/appender&gt;
+  
+在主配置文件中要激活该功能
+spring.profiles.active=dev
+</code></pre>
+<p>如果使用 logback.xml 作为日志配置文件，还要使用 profile 功能，会有以下错误</p>
+<p><code>no applicable action for [springProfile]</code></p>
+<h5 id="toc_h5_6">切换到 log4j</h5>
+<pre><code class="language-xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+   &lt;exclusions&gt;
+       &lt;!-- 排除两个依赖 --&gt;
+       &lt;!-- 要用到log4j，所以要排除logback --&gt;
+       &lt;exclusion&gt;
+           &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+           &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+       &lt;/exclusion&gt;
+       &lt;!-- 这个依赖是将log4j转成其他实现，要用log4j需要去除 --&gt;
+       &lt;exclusion&gt;
+           &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+           &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+       &lt;/exclusion&gt;
+   &lt;/exclusions&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;!-- 导入log4j依赖 --&gt;
+   &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+   &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h5 id="toc_h5_7">切换到 log4j2</h5>
+<pre><code class="language-xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+   &lt;exclusions&gt;
+       &lt;exclusion&gt;
+           &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+       &lt;/exclusion&gt;
+   &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+                <div>
+                    <hr>
+
+标题：Spring Boot与日志<br>
+作者：<a href="https://wuruohui.github.io" target="_blank">WuRuoHui</a><br>
+地址：<a href="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html" target="_blank">https://wuruohui.github.io/articles/2020/11/23/1606090789595.html</a><br>
+
+<!-- 签名档内可使用 HTML、JavaScript -->
+<br>
+                </div>
+        </div>
+    </div>
+    <div class="post__toc">
+<ul class="article__toc">
+        <li class="toc__h4">
+            <a href="#toc_h4_0">SLF4j 的使用</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_1">如何在系统中使用 SLF4j</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_2">遗留问题</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_3">SpringBoot 的日志关系</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_4">日志使用</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_5">指定配置文件</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_6">切换到 log4j</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_7">切换到 log4j2</a>
+        </li>
+</ul>    </div>
+    <div class="body--gray post__gray">
+        <div class="wrapper comment">
+                <div id="gitalk-container" style="padding: 30px 0;"></div>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="padding: 30px 0;" data-name="WuRuoHui" data-postId="1606090789229"></div>
+
+            <div class="post__list fn__flex">
+                <div class="fn__flex-1">
+                    <div id="externalRelevantArticles"></div>
+                </div>
+                <div class="post__list-mid fn__flex-1">
+                    <div id="randomArticles"></div>
+                </div>
+                <div class="fn__flex-1">
+                    <div id="relevantArticles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__fix">
+        <div class="wrapper">
+            <span class="post__share mobile__none">
+                Share
+                <span class="tag tag--4" data-type="weibo">WeiBo</span>
+                <span class="tag tag--5" data-type="twitter">Twitter</span>
+                <span class="tag tag--6" data-type="qqz">QZone</span>
+                <span class="post__code tag tag--7"
+                      data-type="wechat"
+                      data-title="Spring Boot与日志"
+                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-url="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html"
+                      data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                    WeChat
+                    <span class="qrcode"></span>
+                </span>
+            </span>
+            <span class="post__arrow">
+                    <a href="https://wuruohui.github.io/articles/2020/11/20/1605886055349.html" rel="prev"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Spring Boot之配置"
+                       aria-label="旧一篇: Spring Boot之配置">←</a>
+
+                    <a href="https://wuruohui.github.io/articles/2020/11/26/1606349708094.html" rel="next"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Spring Boot与Web"
+                       aria-label="新一篇: Spring Boot与Web">→</a>
+                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到顶部">↑</a>
+                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到底部">↓</a>
+            </span>
+        </div>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+    articleId: "1606090789229",
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    Util.addScript('https://wuruohui.github.io/js/page.min.js?1613894294256', 'soloPageScript')
+    var page = new Page({
+        "commentContentCannotEmptyLabel": "评论不能为空",
+        "oId": "1606090789229",
+        "blogHost": "https://wuruohui.github.io",
+        "randomArticles1Label": "随机阅读：",
+        "externalRelevantArticles1Label": "站外相关阅读："
+    });
+    $(document).ready(function () {
+        page.load();
+    page.tips.externalRelevantArticlesDisplayCount = "0";
+    page.loadRandomArticles('<h3>RECOMMEND POSTS</h3>');
+    page.loadRelevantArticles('1606090789229', '<h3>RELEVANT POSTS</h3>');
+Skin.initArticle()
+    });
+</script>
+
+</body>
+</html>
+
+<!-- Generated by Latke (https://github.com/88250/latke) in 31ms, 2021/02/21 15:59:55 -->

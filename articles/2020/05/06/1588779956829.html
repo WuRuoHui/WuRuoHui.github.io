@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>Hibernate - WuRuoHui 的个人博客</title><meta name="description" content="ORM(Object/Relation Mapping): 对象/关系映射 ORM 主要解决对象-关系的映射 ORM的思想：将关系数据库中表中的记录映射成为对象，以对象的形式展现，程序员可以把对数据库的操作转化为对对象的操作。 ORM 采用元数据来描述对象-关系映射细节, 元数据通常采用 XML 格式, 并且存放在专门的对象-关系映射文件中. 配置文件 元数据（xxx.hbm.xml） &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE hibernate-mapping PUBLIC &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot; &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt; &lt;!-- 配置表与实体对象的关系 --&gt; &lt;!-- package属性:填写一个包名.在元素内部凡是需要书写完整类名的属性,可以直接写简答类名了. --&gt; &lt;hibernate-mapping pac...."/><meta property="og:description" content="ORM(Object/Relation Mapping): 对象/关系映射 ORM 主要解决对象-关系的映射 ORM的思想：将关系数据库中表中的记录映射成为对象，以对象的形式展现，程序员可以把对数据库的操作转化为对对象的操作。 ORM 采用元数据来描述对象-关系映射细节, 元数据通常采用 XML 格式, 并且存放在专门的对象-关系映射文件中. 配置文件 元数据（xxx.hbm.xml） &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE hibernate-mapping PUBLIC &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot; &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt; &lt;!-- 配置表与实体对象的关系 --&gt; &lt;!-- package属性:填写一个包名.在元素内部凡是需要书写完整类名的属性,可以直接写简答类名了. --&gt; &lt;hibernate-mapping pac...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="Hibernate - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="Hibernate - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html">        <link rel="stylesheet"
+              href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+            <link rel="prev" title="Java反射机制" href="https://wuruohui.github.io/articles/2020/04/28/1588044427400.html">
+            <link rel="next" title="Spring" href="https://wuruohui.github.io/articles/2020/05/23/1590191223921.html">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body>
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
+
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="post wrapper wrapper--miner">
+        <h2 class="item__title">
+            <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html">
+                Hibernate
+            </a>
+        </h2>
+        <div class="ft__fade item__meta">
+                Published on
+            <time>
+                May 6, 2020
+            </time>
+            with <span data-uvstaturl="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html">0</span> views
+                and <a href="#b3logsolocomments"><span data-uvstatcmt="1588779956198">0</span> comments</a>
+        </div>
+        <div class="item__tags">
+                <a rel="tag" class="tag tag--0" href="https://wuruohui.github.io/tags/Hibernate">
+                    <b># Hibernate</b>
+                </a>
+                <a rel="tag" class="tag tag--1" href="https://wuruohui.github.io/tags/Java">
+                    <b># Java</b>
+                </a>
+                <a rel="tag" class="tag tag--2" href="https://wuruohui.github.io/tags/JavaEE">
+                    <b># JavaEE</b>
+                </a>
+                <a rel="tag" class="tag tag--3" href="https://wuruohui.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+                    <b># 学习笔记</b>
+                </a>
+        </div>
+        <div class="vditor-reset">
+            <p>ORM(Object/Relation Mapping): 对象/关系映射</p>
+<p>ORM 主要解决对象-关系的映射</p>
+<p><img src="https://img.hacpai.com/file/2020/05/image-ec63f953.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<p>ORM的思想：将关系数据库中表中的记录映射成为对象，以对象的形式展现，程序员可以把对数据库的操作转化为对对象的操作。<br>
+ORM 采用元数据来描述对象-关系映射细节, 元数据通常采用 XML 格式, 并且存放在专门的对象-关系映射文件中.</p>
+<h2 id="toc_h2_0">配置文件</h2>
+<h3 id="toc_h3_1">元数据（xxx.hbm.xml）</h3>
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;
+&lt;!-- 配置表与实体对象的关系 --&gt;
+&lt;!-- package属性:填写一个包名.在元素内部凡是需要书写完整类名的属性,可以直接写简答类名了. --&gt;
+&lt;hibernate-mapping package="com.wu.domain"&gt;
+    &lt;!--
+        class元素: 配置实体与表的对应关系的
+            name: 完整类名
+            table:数据库表名
+     --&gt;
+    &lt;class name="User" table="user"&gt;
+        &lt;!-- id元素:配置主键映射的属性
+                name: 填写主键对应属性名
+                column(可选): 填写表中的主键列名.默认值:列名会默认使用属性名
+                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.
+                        每个类型有三种填法: java类型|hibernate类型|数据库类型
+                not-null(可选):配置该属性(列)是否不能为空. 默认值:false
+                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度
+         --&gt;
+        &lt;id name="username" column="username"&gt;
+            &lt;!-- generator:主键生成策略
+                identity：主键自增，由数据库来维护主键值，录入时不需要指定主键
+                increment：主键自增，有hibernate来维护，每次插入前会先查询表中id最大值，+1作为新主键（有线程安全问题，不使用）
+                sequence：Oracle中的主键生成策略
+                hilo：高低位算法，主键自增，由hibernate来维护，开发不使用
+                native：hilo+sequence+identity，自动三选一策略
+                uuid：产生随机字符串作为主键，主键类型必须为string类型
+                assigned：自然主键生成策略，hibernate不会管理主键，由自己录
+            --&gt;
+            &lt;generator class="native"&gt;&lt;/generator&gt;
+        &lt;/id&gt;
+        &lt;!-- property元素:除id之外的普通属性映射
+                name: 填写属性名
+                column(可选): 填写列名
+                type(可选):填写列(属性)的类型.hibernate会自动检测实体的属性类型.
+                        每个类型有三种填法: java类型|hibernate类型|数据库类型（java.lang.String，string，varchar）
+                not-null(可选):配置该属性(列)是否不能为空. 默认值:false
+                length(可选):配置数据库中列的长度. 默认值:使用数据库类型的最大长度
+         --&gt;
+        &lt;property name="password" column="password"&gt;
+            &lt;!--  &lt;column name="cust_name" type="java.lang.String" &gt;&lt;/column&gt; --&gt;
+            &lt;!--  &lt;column name="cust_name" type="string" &gt;&lt;/column&gt; --&gt;
+            &lt;!--  &lt;column name="cust_name" sql-type="varchar" &gt;&lt;/column&gt; --&gt;
+        &lt;/property&gt;
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;
+</code></pre>
+<h3 id="toc_h3_2">主配置文件（hibernate.cfg.xml)</h3>
+<pre><code class="language-xml">&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;
+&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        &lt;!--必选配置--&gt;
+        &lt;!--数据库驱动--&gt;
+        &lt;property name="hibernate.connection.driver_class"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;!--数据库连接--&gt;
+        &lt;property name="connection.url"&gt;jdbc:mysql:///frame&lt;/property&gt;
+        &lt;!--数据库连接用户名--&gt;
+        &lt;property name="connection.username"&gt;root&lt;/property&gt;
+        &lt;!--数据库连接密码--&gt;
+        &lt;property name="connection.password"&gt;458974&lt;/property&gt;
+        &lt;!--数据库方言
+            不同数据库中，sql语法略有区别，指定方言可以让hibernate在生成sql语句时，针对数据库的方言生成
+            sql99标准：DDL：定义语言  定义语言   库表的增删改查
+                       DCL：控制语言  事务 权限
+                       DML：操纵语言  增删改查
+        --&gt;
+        &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;
+        &lt;!--
+            hibernate.dialect org.hibernate.dialect.MySQLDialect    一般选择这个通用的语法引擎
+            hibernate.dialect org.hibernate.dialect.MySQLInnoDBDialect
+            hibernate.dialect org.hibernate.dialect.MySQLMyISAMDialect
+         --&gt;
+
+        &lt;!--可选属性
+            ## print all generated SQL to the console
+            hibernate.show_sql true
+            ## format SQL in log and console
+            hibernate.format_sql true
+        --&gt;
+        &lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;
+        &lt;property name="hibernate.format_sql"&gt;true&lt;/property&gt;
+
+        &lt;!--## auto schema export  自动导出表结构（自动建表）
+            hibernate.hbm2ddl.auto create         自动建表，每次框架运行是都会创建新的表，以前的表会被覆盖，表数据会丢失，一般是开发环境中测试使用
+            hibernate.hbm2ddl.auto create-drop    自动建表，每次框架运行结束时删除所有表
+            hibernate.hbm2ddl.auto update         自动生成表，如果已经存在不会再生成，如果表有变动，自动更新表（不会删除任何数据）
+            hibernate.hbm2ddl.auto validate       校验，不自动生成表，每次启动会校验数据库中表是否正确。校验失败就报错
+         --&gt;
+        &lt;property name="hibernate.hbm2ddl.auto"&gt;update&lt;/property&gt;
+
+        &lt;!--  引入orm元数据
+            路径书写：填写src下的路径
+        --&gt;
+        &lt;mapping resource="com/wu/domain/user.hbm.xml"/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre>
+<h4 id="toc_h4_3">使用C3P0数据源</h4>
+<p>C3P0 数据库连接池属性<br>
+hibernate.c3p0.max_size: 数据库连接池的最大连接数<br>
+hibernate.c3p0.min_size: 数据库连接池的最小连接数<br>
+hibernate.c3p0.timeout:   数据库连接池中连接对象在多长时间没有使用过后，就应该被销毁<br>
+hibernate.c3p0.max_statements:  缓存 Statement 对象的数量<br>
+hibernate.c3p0.idle_test_period:  表示连接池检测线程多长时间检测一次池内的所有链接对象是否超时. 连接池本身不会把自己从连接池中移除，而是专门有一个线程按照一定的时间间隔来做这件事，这个线程通过比较连接对象最后一次被使用时间和当前时间的时间差来和 timeout 做对比，进而决定是否销毁这个连接对象。<br>
+hibernate.c3p0.acquire_increment: 当数据库连接池中的连接耗尽时, 同一时刻获取多少个数据库连接</p>
+<h2 id="toc_h2_4">API</h2>
+<h3 id="toc_h3_5">Configuration对象：配置加载类，用于加载主配置文件，orm元数据加载</h3>
+<p>Configuration 类负责管理 Hibernate 的配置信息。包括如下内容：</p>
+<ul>
+<li>Hibernate 运行的底层信息：数据库的URL、用户名、密码、JDBC驱动类，数据库Dialect,数据库连接池等（对应 hibernate.cfg.xml 文件）。</li>
+<li>持久化类与数据表的映射关系（*.hbm.xml 文件）</li>
+</ul>
+<pre><code class="language-java">//1.创建，调用空参构造
+Configuration conf = new Configuration();
+//2.读取指定主配置文件，空参加载方法，该方法默认加载src下的hibernate.cfg.xml文件
+conf.configure();
+//3.读取指定orm元数据，如果主配置文件已经引入了映射配置，不需要手动加载（以前是使用properties，要手动加载）
+//conf.addResource(resourceName);
+//conf.addClass(persistentClass);
+</code></pre>
+<h3 id="toc_h3_6">SessionFactory对象：用于创建数据库核心对象session对象的工厂</h3>
+<p>1.SessionFactory：负责保存和使用所有的配置信息。消耗内存资源非常大</p>
+<p>2.SessionFactory属于线程安全的对象设计</p>
+<p>所有要保证在web项目中只创建一个SessionFactory对象</p>
+<pre><code class="language-java">//根据配置文件信息，创建SessionFactory对象
+StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure().build();
+SessionFactory 	sessionFactory = new MetadataSources(ssr).buildMetadata().buildSessionFactory();
+</code></pre>
+<h3 id="toc_h3_7">Session：</h3>
+<p>Session 是应用程序与数据库之间交互操作的一个单线程对象，是 Hibernate 运作的中心，所有持久化对象必须在 session 的管理下才可以进行持久化操作。此对象的生命周期很短。Session 对象有一个一级缓存，显式执行 flush 之前，所有的持久层操作的数据都缓存在 session 对象处。相当于 JDBC 中的 Connection。</p>
+<ul>
+<li>Session 接口是 Hibernate 向应用程序提供的操纵数据库的最主要的接口, 它提供了基本的保存, 更新, 删除和加载 Java 对象的方法.</li>
+<li>Session 具有一个缓存, 位于缓存中的对象称为持久化对象, 它和数据库中的相关记录对应. Session 能够在某些时间点, 按照缓存中对象的变化来执行相关的 SQL 语句, 来同步更新数据库, 这一过程被称为刷新缓存(flush)</li>
+<li>站在持久化的角度, Hibernate 把对象分为 4 种状态: 持久化状态, 临时状态, 游离状态, 删除状态. Session 的特定方法能使对象从一个状态转换到另一个状态.</li>
+</ul>
+<pre><code class="language-java">//打开一个新的session对象
+Session session = sessionFactory.openSession();
+//获得一个与线程绑定的session对象
+sessionFactory.getCurrentSession();
+//Session对象的功能：表达hibernate框架与数据库之间的连接（会话）。session类似JDBC年代的connection对象，还可以完成对数据库的增删改查操作，是hibernate操作数据库的核心对象
+//session获得操作事务的Transaction对象
+//获得操作事务的对象
+Transaction transaction = session.getTransaction();
+//开启并获得操作事务的对象
+Transaction transaction = session.beginTransaction();
+//-----------------
+User user = session.get(User.class, "wu");
+session.save(user);
+session.update(user);
+//-----------------
+//事务提交
+transaction.commit();
+//事务回滚
+transaction.rollback();
+//关闭资源
+ session.close();
+ sessionFactory.close();
+
+</code></pre>
+<h4 id="toc_h4_8">方法</h4>
+<p>（1）取得持久化对象的方法： get() load()<br>
+（2）持久化对象都得保存，更新和删除：save(),update(),saveOrUpdate(),delete()<br>
+（3）开启事务: beginTransaction().<br>
+（4）管理 Session 的方法：isOpen(),flush(), clear(), evict(), close()等</p>
+<h4 id="toc_h4_9">Session缓存（一级缓存）：提高效率</h4>
+<pre><code class="language-java">session.get(User.class,"wu");  //多个该条语句只执行一次sql语句，用"=="测试也会返回true
+
+get()方法会先从缓存中查找，如果存在记录，就会直接返回数据（不完全）
+</code></pre>
+<h5 id="toc_h5_10">操作Session缓存</h5>
+<p>1.flush()：使数据表中的记录和缓存中的保持一致，为了保持一致，则可能发送对应的sql语句</p>
+<p>（1）在Transaction的commit()方法中，先调用session的flush方法，再提交事务<br>
+（2）flush()方法可能会发送sql语句，但不会提交事务<br>
+（3）执行HQL或QBC查询，会先进行flush()操作，以得到数据库表的最新记录<br>
+（4）若记录的ID是由底层数据库使用自增的方式生成的，则在调用save()方法后，会立即发送insert语句，因为save方法后，必须保证对象的ID是存在的</p>
+<p>2.refresh()：会强制发送select语句，以使Session缓存中的对象的状态和数据库中保持一致</p>
+<p>3.clear()：清除缓存</p>
+<h3 id="toc_h3_11">创建实体类注意事项</h3>
+<p>1.持久化类提供无参构造方法</p>
+<p>2.成员变量私有，提供getter/setter方法（有了getter/setter才能称为属性，1对getter/setter称为一个属性）</p>
+<p>3.持久化类中的属性，应该尽量使用包装类型（用包装类型可以多表示一个null）</p>
+<p>4.持久化需要提供oid与数据库中的主键列对应（表必须有主键）</p>
+<p>5.不要用final修饰class（hibernate使用cglib代理生成代理对象，代理对象是继承被代理对象，如果被final修饰，将无法生成代理）</p>
+<p>6.重写 eqauls 和 hashCode 方法: 如果需要把持久化类的实例放到 Set 中(当需要进行关联映射时), 则应该重写这两个方法</p>
+<h2 id="toc_h2_12">hibernate中对象的状态</h2>
+<p>持久化状态、临时状态、游离状态、删除状态</p>
+<p>1.临时对象（Transient）:</p>
+<ul>
+<li>在使用代理主键的情况下, OID 通常为 null</li>
+<li>不处于 Session 的缓存中</li>
+<li>在数据库中没有对应的记录</li>
+</ul>
+<p>2.持久化对象(也叫”托管”)（Persist）：</p>
+<ul>
+<li>OID 不为 null</li>
+<li>位于 Session 缓存中</li>
+<li>若在数据库中已经有和其对应的记录, 持久化对象和数据库中的相关记录对应</li>
+<li>Session 在 flush 缓存时, 会根据持久化对象的属性变化, 来同步更新数据库</li>
+<li>在同一个 Session 实例的缓存中, 数据库表中的每条记录只对应唯一的持久化对象</li>
+</ul>
+<p>3.删除对象(Removed)</p>
+<ul>
+<li>在数据库中没有和其 OID 对应的记录</li>
+<li>不再处于 Session 缓存中</li>
+<li>一般情况下, 应用程序不该再使用被删除的对象</li>
+</ul>
+<p>4.游离对象(也叫”脱管”) （Detached）：</p>
+<ul>
+<li>OID 不为 null</li>
+<li>不再处于 Session 缓存中</li>
+<li>一般情况需下, 游离对象是由持久化对象转变过来的, 因此在数据库中可能还存在与它对应的记录</li>
+</ul>
+<h3 id="toc_h3_13">对象状态的转换</h3>
+<p><img src="https://b3logfile.com/file/2020/05/屏幕快照2020051908.08.05-159a896f.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="屏幕快照2020051908.08.05.png"></p>
+<p>1.save()方法</p>
+<p>（1）Session 的 save() 方法使一个临时对象转变为持久化对象<br>
+（2）Session 的 save() 方法完成以下操作:</p>
+<ul>
+<li>把对象加入到 Session 缓存中, 使它进入持久化状态</li>
+<li>选用映射文件指定的标识符生成器, 为持久化对象分配唯一的 OID. 在 使用代理主键的情况下, setId() 方法为对象设置 OID 是无效的.</li>
+<li>计划执行一条 insert 语句：在 flush 缓存的时候<br>
+（3）Hibernate 通过持久化对象的 OID 来维持它和数据库相关记录的对应关系. 当对象处于持久化状态时, 不允许程序随意修改它的 ID</li>
+</ul>
+<p>2.persist()方法：也可进行insert操作</p>
+<p>与save()的区别：在调用persist方法之前，若对象已经有了OID，则不会进行insert操作，而抛出异常</p>
+<p>3.get() VS load()</p>
+<p>都可以根据给定的 OID 从数据库中加载一个持久化对象</p>
+<p>区别：</p>
+<p>（1）执行get()方法会立即加载对象。而执行load方法，若不使用该对象，则不会立即查询对象，而返回一个代理对象</p>
+<p>get是立即检索，load是延迟检索</p>
+<p>（2）若数据库中没有对应的记录，且Session没有被关闭</p>
+<ul>
+<li>get()返回null</li>
+<li>不使用对象属性时不抛异常，使用到对象属性时，load()抛出异常</li>
+</ul>
+<p>（3）load()方法可能会抛出LazyInitializationException（懒加载异常）-- 在初始化对象之前已经关闭了Session</p>
+<p>4.update()</p>
+<p>（1）若更新一个持久化对象，不需要显式的调用update方法。因为在调用Transaction的commit()方法时，会先执行session的flush()方法<br>
+（2）更新一个游离对象，需要显式地调用update()方法  -- 可以把一个游离对象变成一个持久化对象</p>
+<p>注意：</p>
+<p>（1）无论要更新的游离对象和数据库表记录是否一致，都会发送update()语句</p>
+<p>解决方法：通过在xxx.hbm.xml的class节点设置select-before-update=true（默认为false，通常不设置）</p>
+<pre><code>&lt;class name="News" table="NEWS" dynamic-insert="true" select-before-update="true"&gt;
+&lt;/class&gt;
+</code></pre>
+<p>（2）若数据表中没有对应的记录，还调用了update()方法，则抛出异常</p>
+<p>（3）当 update() 方法关联一个游离对象时, 如果在 Session 的缓存中已经存在相同 OID 的持久化对象, 会抛出异常 -- 在session中不能存在两个OID相同的对象</p>
+<p>5.saveOrUpdate()</p>
+<p>注意：</p>
+<p>（1）若OID不为null，且数据表中无对应记录，则抛出异常<br>
+（2）OID值等于id的unsaved-value属性值的对象，也被认为是一个游离对象</p>
+<p>6.merge()</p>
+<p>7.delete()：执行删除操作，只要OID与数据表中的一条记录对应，则进行删除操作；若没有对应记录，则抛出异常</p>
+<p>删除后对象的OID还是存在的，如果对其进行更新或者保存操作，则会报错，为了防止这种情况，可以设置主配置文件中<br>
+hibernate.use_identifier_rollback 属性, 其默认值为 false, 若把它设为 true, 将改变 delete() 方法的运行行为: delete() 方法会把持久化对象或游离对象的 OID 设置为 null, 使它们变为临时对象</p>
+<pre><code>&lt;!-- 删除对象后，使其OID置为null --&gt;
+&lt;property name="hibernate.use_identifier_rollback"&gt;true&lt;/property&gt;
+</code></pre>
+<h2 id="toc_h2_14">关联关系</h2>
+<h3 id="toc_h3_15">单向多对一</h3>
+<p><many-to-one> 元素来映射组成关系<br>
+name: 设定待映射的持久化类的属性的名字<br>
+column: 设定和持久化类的属性对应的表的外键<br>
+class：设定待映射的持久化类的属性的类型</many-to-one></p>
+<pre><code class="language-xml">&lt;many-to-one name="customer" class="Customer" column="CUSTOMER-ID" not-null="true"&gt;&lt;/many-to-one&gt;
+</code></pre>
+<h3 id="toc_h3_16">双向一对多</h3>
+<pre><code>&lt;!-- 一的一方 --&gt;
+&lt;!-- 集合，一对多关系，在配置文件中配置 --&gt;
+&lt;!--
+    name属性：集合属性名
+    column：外键列名
+    class属性：与外键关联的对象完整类名
+    cascade属性：级联操作(简化操作)
+        save-update：级联保存升级
+        delete：级联删除
+        all：save-update+delete
+    inverse属性：关系维护，性能优化，提高关系维护的性能
+        true：不维护，交给另一方维护
+        false（默认）：维护
+        原则：无论怎么放弃，总有一方要维护，在一对多种，多的一方不能放弃维护，外键就在多的一方
+--&gt;
+&lt;set name="linkMans"&gt;
+    &lt;key column="lkm_cust_id"&gt;&lt;/key&gt;
+    &lt;one-to-many class="LinkMan"&gt;&lt;/one-to-many&gt;
+&lt;/set&gt;
+
+&lt;!-- 多的一方 --&gt;
+
+&lt;many-to-one name="customer" column="lkm_cust_id" class="Customer"&gt;&lt;/many-to-one&gt;
+
+//测试代码
+
+        Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        Customer customer = new Customer();
+        customer.setCust_name("wu");
+        LinkMan linkMan = new LinkMan();
+        linkMan.setLkm_name("mm");
+        LinkMan linkMan1 = new LinkMan();
+        linkMan1.setLkm_name("tt");
+        
+        //表达一对多，有多个联系人，如果客户放弃维护，则这两句维护关系的代码可以不写
+        customer.getLinkMans().add(linkMan);  
+        customer.getLinkMans().add(linkMan1);
+        
+        //表达多对一，联系人属于一个用户
+        linkMan.setCustomer(customer);
+        linkMan1.setCustomer(customer);
+
+        session.save(customer);
+        session.save(linkMan);
+        session.save(linkMan1);
+
+        transaction.commit();
+        session.close();
+        
+//为已存在的用户添加一个联系人
+
+        Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        Customer customer = session.get(Customer.class, 1l);
+        LinkMan linkMan = new LinkMan();
+        linkMan.setLkm_name("hh");
+        customer.getLinkMans().add(linkMan);
+        session.save(linkMan);
+        transaction.commit();
+        session.close();
+        
+//删除一个联系人
+        Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+        Customer customer = session.get(Customer.class, 1l);
+        LinkMan linkMan = session.get(LinkMan.class, 5l);
+        customer.getLinkMans().remove(linkMan);
+        linkMan.setCustomer(null);  //这时记录还在，关联字段为null
+        transaction.commit();
+        session.close();
+</code></pre>
+<h3 id="toc_h3_17">多对多</h3>
+<p>表：两个表需要有一个中间表，表至少拥有两列</p>
+<p>实体：两方都使用集合来表达拥有多个对方</p>
+<pre><code>&lt;!--
+    name属性：集合属性名
+    table：配置中间表名
+    key：
+        column：外键，别人引用我的
+    many-to-many：
+        class：与哪个类多对多
+        column：外键，我引用别人的
+    inverse：关系维护，只能一方维护，由哪一个维护根据业务走向
+            如果双方都维护，会在中间表中插入相同的记录，会报错
+ --&gt;
+&lt;set name="roles" table="sys_user_role" inverse="true"&gt;
+    &lt;key column="user_id"&gt;&lt;/key&gt;
+    &lt;many-to-many class="Role" column="role_id"&gt;&lt;/many-to-many&gt;
+&lt;/set&gt;
+</code></pre>
+<pre><code>Session session = HibernateUtils.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        User u1 = new User();
+        User u2 = new User();
+
+        u1.setUser_name("wu");
+        u2.setUser_name("tt");
+
+        Role r1 = new Role();
+        Role r2 = new Role();
+
+        r1.setRole_name("leader");
+        r2.setRole_name("part");
+
+        u1.getRoles().add(r1);
+        u1.getRoles().add(r2);
+        u2.getRoles().add(r1);
+        u2.getRoles().add(r2);
+        
+        //如果不加inverse属性，写入这四列代码会报错，加入之后可写可不写
+        //r1.getUsers().add(u1);
+        //r1.getUsers().add(u2);
+        //r2.getUsers().add(u1);
+        //r2.getUsers().add(u2);
+
+        session.save(u1);
+        session.save(u2);
+        session.save(r1);
+        session.save(r2);
+
+        transaction.commit();
+        session.close();
+</code></pre>
+<h2 id="toc_h2_18">检索策略</h2>
+<h3 id="toc_h3_19">类级别的检索策略</h3>
+<p>（1）立即检索: 立即加载检索方法指定的对象<br>
+（2）延迟检索: 延迟加载检索方法指定的对象。在使用具体的属性时，再进行加载（默认）</p>
+<p>类级别的检索策略可以通过 <class> 元素的 lazy 属性进行设置</class></p>
+<p>如果程序加载一个对象的目的是为了访问它的属性, 可以采取立即检索.<br>
+如果程序加载一个持久化对象的目的是仅仅为了获得它的引用, 可以采用延迟检索。注意出现懒加载异常！</p>
+<p>无论 <class> 元素的 lazy 属性是 true 还是 false, Session 的 get() 方法及 Query 的 list() 方法在类级别总是使用立即检索策略<br>
+若 <class> 元素的 lazy 属性为 true 或取默认值, Session 的 load() 方法不会执行查询数据表的 SELECT 语句, 仅返回代理类对象的实例, 该代理类实例有如下特征:</class></class></p>
+<ul>
+<li>由 Hibernate 在运行时采用 CGLIB 工具动态生成</li>
+<li>Hibernate 创建代理类实例时, 仅初始化其 OID 属性</li>
+<li>在应用程序第一次访问代理类实例的非 OID 属性时, Hibernate 会初始化代理类实例</li>
+</ul>
+<h3 id="toc_h3_20">一对多和多对多的检索策略</h3>
+<pre><code>//集合级别的关联，在一的一方的set中配置
+    lazy属性：决定是否延迟加载
+        true（默认值）：延迟加载，懒加载
+        false：立即加载
+        extra：极其懒惰
+    fetch属性：决定加载策略，使用什么类型的sql语句加载集合数据
+        select（默认值）：单表查询加载
+        join：使用多表查询加载集合 -- 迫切左外链接查询（使用左外链接查询，且把集合属性进行初始化）
+        subselect：使用子查询加载集合
+//属性级别的关联，在多的一方many-to-one属性上配置
+</code></pre>
+<p><img src="https://b3logfile.com/file/2020/05/image-aba48955.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<h3 id="toc_h3_21">多对一和一对一关联检索策略</h3>
+<p><img src="https://b3logfile.com/file/2020/05/image-1545aae7.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png"></p>
+<p>若 fetch 属性设为 join, 那么 lazy 属性被忽略</p>
+<p>迫切左外连接检索策略的优点在于比立即检索策略使用的 SELECT 语句更少.</p>
+<p>无代理延迟检索需要增强持久化类的字节码才能实现</p>
+<h2 id="toc_h2_22">数据检索</h2>
+<h3 id="toc_h3_23">HQL（Hibernate Query Language）</h3>
+<pre><code>	//按参数名称绑定
+	//创建query对象
+        String hql = "from News where title = :title";
+        Query query = session.createQuery(hql);
+	//绑定参数
+        query.setParameter("title","wu");
+
+	//按参数位置绑定
+	String hql = "from News where title = ?";
+        Query query = session.createQuery(hql);
+        query.setParameter(0,"wu");
+</code></pre>
+<h3 id="toc_h3_24">分页查询</h3>
+<p>（1）setFirstResult(int firstResult): 设定从哪一个对象开始检索, 参数 firstResult 表示这个对象在查询结果中的索引位置, 索引位置的起始值为 0. 默认情况下, Query 从查询结果中的第一个对象开始检索<br>
+（2）setMaxResults(int maxResults): 设定一次最多检索出的对象的数目. 在默认情况下, Query 和 Criteria 接口检索出查询结果中所有的对象</p>
+<h3 id="toc_h3_25">命名查询语句</h3>
+<p>在映射文件中定义命名查询语句<br>
+Hibernate 允许在映射文件中定义字符串形式的查询语句.<br>
+<query> 元素用于定义一个 HQL 查询语句, 它和 <class> 元素并列.</class></query></p>
+<pre><code>    &lt;query name="queryAllNews"&gt;&lt;![CDATA[from News where title = :title]]&gt;&lt;/query&gt;
+
+</code></pre>
+<p>在程序中通过 Session 的 getNamedQuery() 方法获取查询语句对应的 Query 对象.</p>
+<pre><code class="language-java">Query queryAllNews = session.getNamedQuery("queryAllNews");
+queryAllNews.setParameter("title","wu");
+</code></pre>
+<h3 id="toc_h3_26">聚合函数：</h3>
+<p>count：</p>
+<pre><code>String hql = "select count(*) from User";  //返回的是long类型
+
+Number number = session.createQuery(hql).uniqueResult()
+</code></pre>
+<p>sum：</p>
+<pre><code>String hql = "select sum(cust_id) from User";  
+
+Number number = session.createQuery(hql).uniqueResult()
+</code></pre>
+<p>avg：</p>
+<pre><code>String hql = "select avg(cust_id) from User";  
+
+Number number = session.createQuery(hql).uniqueResult()
+</code></pre>
+<p>max：</p>
+<pre><code>String hql = "select max(cust_id) from User";  
+
+Number number = session.createQuery(hql).uniqueResult()
+</code></pre>
+<p>min：</p>
+<pre><code>String hql = "select min(cust_id) from User";  
+
+Number number = session.createQuery(hql).uniqueResult();
+</code></pre>
+<h3 id="toc_h3_27">投影查询：</h3>
+<pre><code>String hql = "select cust_id,cust_name from User";  //每一个返回的类型是一个数组
+
+String hql = "select new Cuntomer(cust_id,cust_name) from User";  //把查到的数据封装到对象中，必须有对应查询属性的构造方法（需要封装多少个，新增的构造方法就要对应的参数），还得加入空参构造
+</code></pre>
+<h3 id="toc_h3_28">多表查询</h3>
+<p>内连接（迫切）：</p>
+<pre><code>String hql = "from Customer c inner join c.linkMens";  //返回的类型是一个元素为数组的集合
+
+List&lt;Object[]&gt; list = session.createQuery(hql).list();  //将连接的两端对象分别返还，放到数组中
+
+String hql = "from Customer c inner join fetch c.linkMens";  //迫切内连接，帮我们进行封装，返回值是一个对象 
+
+List&lt;Customer&gt; list = session.createQuery(hql).uniqueResult();  //将连接的两端对象分别返还，放到数组中
+</code></pre>
+<p>外连接：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;左外（迫切）：</p>
+<pre><code>String hql = "from Customer c left join c.linkMens";
+</code></pre>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;右外（迫切）：</p>
+<pre><code>String hql = "from Customer c right join c.linkMens";
+</code></pre>
+<h3 id="toc_h3_29">Criteria：hibernate自创的无语句面向对象查询(单表条件查询)</h3>
+<p>基本查询：</p>
+<pre><code class="language-java">Criteria criteria = session.createCriteria(User.class);
+List&lt;User&gt; list = criteria.list();   //获得结果集
+User user = (User)criteria.uniqueResult();   //获得单个对象
+</code></pre>
+<p>条件查询：</p>
+<p>使用Restrictions的静态方法</p>
+<blockquote>
+<p>：gt()</p>
+</blockquote>
+<blockquote>
+<p>=：ge()</p>
+</blockquote>
+<p>&lt;：lt()</p>
+<p>&lt;=：le()</p>
+<p>==：eq()</p>
+<p>!=：ne()</p>
+<p>in：in()</p>
+<p>between and：between()</p>
+<p>like：like()</p>
+<p>is not null：isNotNull()</p>
+<p>is null：isNull()</p>
+<p>or：or()</p>
+<p>and：and()</p>
+<pre><code>criteria.add(Restrictions.eq("username","wu"));
+</code></pre>
+<p>分页：</p>
+<pre><code>criteria.setFirstResult(0);
+criteria.setMaxResults(1);
+</code></pre>
+<p>排序：</p>
+<pre><code>criteria.addOrder(Order.asc("cust_id"));
+</code></pre>
+<p>聚合函数：</p>
+<pre><code>criteria.setProjection(Projections.rowCount());
+</code></pre>
+<p>离线查询对象</p>
+<p>原本在查询时传递的是查询条件，Criteria也是基于数据库session存在的，实现不同查询时根据查询条件创建多个dao，现在创造了离线的Criteria对象，只需要一个dao，在web层组装查询对象，只需要一个dao就可以</p>
+<pre><code class="language-java">DetachedCriteria detachedCriteria = DetachedCriteria.forClass(User.class);
+Session session = HibernateUtils.getCurrentSession();
+Criteria criteria = detachedCriteria.getExecutableCriteria(session);
+ //将离线Criteria与session关联
+
+</code></pre>
+<h3 id="toc_h3_30">原生SQL查询(复杂业务时使用)：</h3>
+<pre><code>        String sql = "select * from user";
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+//        NativeQuery sqlQuery = session.createSQLQuery(sql);
+        List&lt;Object[]&gt; list = sqlQuery.list();   //返回结果是一个带有数组的List集合
+</code></pre>
+<p>封装数据到实体中</p>
+<pre><code>        SQLQuery sqlQuery = session.createSQLQuery(sql);
+//        NativeQuery sqlQuery = session.createSQLQuery(sql);
+        sqlQuery.addEntity(User.class);
+        List&lt;User&gt; list = sqlQuery.list();
+</code></pre>
+<p>条件查询</p>
+<pre><code>        String sql = "select * from user where username = ?";
+        SQLQuery sqlQuery = session.createSQLQuery(sql);
+        sqlQuery.setParameter(0,"wu");
+//        NativeQuery sqlQuery = session.createSQLQuery(sql);
+        sqlQuery.addEntity(User.class);
+        List&lt;Object[]&gt; list = sqlQuery.list();  
+</code></pre>
+<p>分页</p>
+<pre><code>String sql = "select * from user limit ?,?";
+</code></pre>
+<h2 id="toc_h2_31">Hibernate二级缓存</h2>
+                <div>
+                    <hr>
+
+标题：Hibernate<br>
+作者：<a href="https://wuruohui.github.io" target="_blank">WuRuoHui</a><br>
+地址：<a href="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html" target="_blank">https://wuruohui.github.io/articles/2020/05/06/1588779956829.html</a><br>
+
+<!-- 签名档内可使用 HTML、JavaScript -->
+<br>
+                </div>
+        </div>
+    </div>
+    <div class="post__toc">
+<ul class="article__toc">
+        <li class="toc__h2">
+            <a href="#toc_h2_0">配置文件</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_1">元数据（xxx.hbm.xml）</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_2">主配置文件（hibernate.cfg.xml)</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_3">使用C3P0数据源</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_4">API</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_5">Configuration对象：配置加载类，用于加载主配置文件，orm元数据加载</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_6">SessionFactory对象：用于创建数据库核心对象session对象的工厂</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_7">Session：</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_8">方法</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_9">Session缓存（一级缓存）：提高效率</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_10">操作Session缓存</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_11">创建实体类注意事项</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_12">hibernate中对象的状态</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_13">对象状态的转换</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_14">关联关系</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_15">单向多对一</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_16">双向一对多</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_17">多对多</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_18">检索策略</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_19">类级别的检索策略</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_20">一对多和多对多的检索策略</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_21">多对一和一对一关联检索策略</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_22">数据检索</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_23">HQL（Hibernate Query Language）</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_24">分页查询</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_25">命名查询语句</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_26">聚合函数：</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_27">投影查询：</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_28">多表查询</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_29">Criteria：hibernate自创的无语句面向对象查询(单表条件查询)</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_30">原生SQL查询(复杂业务时使用)：</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_31">Hibernate二级缓存</a>
+        </li>
+</ul>    </div>
+    <div class="body--gray post__gray">
+        <div class="wrapper comment">
+                <div id="gitalk-container" style="padding: 30px 0;"></div>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="padding: 30px 0;" data-name="WuRuoHui" data-postId="1588779956198"></div>
+
+            <div class="post__list fn__flex">
+                <div class="fn__flex-1">
+                    <div id="externalRelevantArticles"></div>
+                </div>
+                <div class="post__list-mid fn__flex-1">
+                    <div id="randomArticles"></div>
+                </div>
+                <div class="fn__flex-1">
+                    <div id="relevantArticles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__fix">
+        <div class="wrapper">
+            <span class="post__share mobile__none">
+                Share
+                <span class="tag tag--4" data-type="weibo">WeiBo</span>
+                <span class="tag tag--5" data-type="twitter">Twitter</span>
+                <span class="tag tag--6" data-type="qqz">QZone</span>
+                <span class="post__code tag tag--7"
+                      data-type="wechat"
+                      data-title="Hibernate"
+                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-url="https://wuruohui.github.io/articles/2020/05/06/1588779956829.html"
+                      data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                    WeChat
+                    <span class="qrcode"></span>
+                </span>
+            </span>
+            <span class="post__arrow">
+                    <a href="https://wuruohui.github.io/articles/2020/04/28/1588044427400.html" rel="prev"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Java反射机制"
+                       aria-label="旧一篇: Java反射机制">←</a>
+
+                    <a href="https://wuruohui.github.io/articles/2020/05/23/1590191223921.html" rel="next"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Spring"
+                       aria-label="新一篇: Spring">→</a>
+                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到顶部">↑</a>
+                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到底部">↓</a>
+            </span>
+        </div>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+    articleId: "1588779956198",
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    Util.addScript('https://wuruohui.github.io/js/page.min.js?1613894294256', 'soloPageScript')
+    var page = new Page({
+        "commentContentCannotEmptyLabel": "评论不能为空",
+        "oId": "1588779956198",
+        "blogHost": "https://wuruohui.github.io",
+        "randomArticles1Label": "随机阅读：",
+        "externalRelevantArticles1Label": "站外相关阅读："
+    });
+    $(document).ready(function () {
+        page.load();
+    page.tips.externalRelevantArticlesDisplayCount = "0";
+    page.loadRandomArticles('<h3>RECOMMEND POSTS</h3>');
+    page.loadRelevantArticles('1588779956198', '<h3>RELEVANT POSTS</h3>');
+Skin.initArticle()
+    });
+</script>
+
+</body>
+</html>
+
+<!-- Generated by Latke (https://github.com/88250/latke) in 14ms, 2021/02/21 15:59:55 -->

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>Spring Boot2自动配置 - WuRuoHui 的个人博客</title><meta name="description" content="1、SpringBoot特点 1.1、依赖管理 父项目做依赖管理 依赖管理 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 他的父项目 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 几乎声明了所有开发中常用的依赖的版本号,自动版本仲裁机制 开发导入starter场景启动器 1. 见到很多 spring-...."/><meta property="og:description" content="1、SpringBoot特点 1.1、依赖管理 父项目做依赖管理 依赖管理 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 他的父项目 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 几乎声明了所有开发中常用的依赖的版本号,自动版本仲裁机制 开发导入starter场景启动器 1. 见到很多 spring-...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="Spring Boot2自动配置 - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="Spring Boot2自动配置 - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html">        <link rel="stylesheet"
+              href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+            <link rel="prev" title="Spring Boot2" href="https://wuruohui.github.io/articles/2021/02/04/1612396619399.html">
+            <link rel="next" title="世界，你好！" href="https://wuruohui.github.io/hello-solo">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body>
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
+
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="post wrapper wrapper--miner">
+        <h2 class="item__title">
+            <a rel="bookmark" href="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html">
+                Spring Boot2自动配置
+            </a>
+        </h2>
+        <div class="ft__fade item__meta">
+                Published on
+            <time>
+                Feb 4, 2021
+            </time>
+            with <span data-uvstaturl="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html">0</span> views
+                and <a href="#b3logsolocomments"><span data-uvstatcmt="1612452633127">0</span> comments</a>
+        </div>
+        <div class="item__tags">
+                <a rel="tag" class="tag tag--0" href="https://wuruohui.github.io/tags/SpringBoot2">
+                    <b># SpringBoot2</b>
+                </a>
+                <a rel="tag" class="tag tag--1" href="https://wuruohui.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+                    <b># 学习笔记</b>
+                </a>
+        </div>
+        <div class="vditor-reset">
+            <h1 id="toc_h1_0">1、SpringBoot特点</h1>
+<h2 id="toc_h2_1">1.1、依赖管理</h2>
+<ul>
+<li>父项目做依赖管理</li>
+</ul>
+<pre><code>依赖管理    
+&lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+&lt;/parent&gt;
+
+他的父项目
+ &lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;
+    &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+  &lt;/parent&gt;
+
+几乎声明了所有开发中常用的依赖的版本号,自动版本仲裁机制
+</code></pre>
+<ul>
+<li>开发导入starter场景启动器</li>
+</ul>
+<pre><code>1. 见到很多 spring-boot-starter-* ： *就某种场景
+2. 只要引入starter，这个场景的所有常规需要的依赖我们都自动引入
+3. SpringBoot所有支持的场景
+https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter
+4. 见到的  *-spring-boot-starter： 第三方为我们提供的简化开发的场景启动器。
+5. 所有场景启动器最底层的依赖
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+  &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+  &lt;scope&gt;compile&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>无需关注版本号，自动版本仲裁</li>
+</ul>
+<pre><code>1. 引入依赖默认都可以不写版本
+2. 引入非版本仲裁的jar，要写版本号。
+</code></pre>
+<ul>
+<li>可以修改默认版本号</li>
+</ul>
+<pre><code>1. 查看spring-boot-dependencies里面规定当前依赖的版本 用的 key。
+2. 在当前项目里面重写配置
+    &lt;properties&gt;
+        &lt;mysql.version&gt;5.1.43&lt;/mysql.version&gt;
+    &lt;/properties&gt;
+</code></pre>
+<h2 id="toc_h2_2">1.2、自动配置</h2>
+<ul>
+<li>自动配好Tomcat
+<ul>
+<li>引入Tomcat依赖。</li>
+<li>配置Tomcat</li>
+</ul>
+</li>
+</ul>
+<pre><code>&lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+      &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+      &lt;scope&gt;compile&lt;/scope&gt;
+    &lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>
+<p>自动配好SpringMVC</p>
+<ul>
+<li>引入SpringMVC全套组件</li>
+<li>自动配好SpringMVC常用组件（功能）</li>
+</ul>
+</li>
+<li>
+<p>自动配好Web常见功能，如：字符编码问题</p>
+</li>
+<li>
+<p>SpringBoot帮我们配置好了所有web开发的常见场景</p>
+</li>
+<li>
+<p>默认的包结构</p>
+</li>
+<li>
+<p>主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来</p>
+</li>
+<li>
+<p>无需以前的包扫描配置</p>
+</li>
+<li>
+<p>想要改变扫描路径，@SpringBootApplication(scanBasePackages=<strong>"top.wu"</strong>)</p>
+</li>
+<li>
+<p>或者@ComponentScan 指定扫描路径</p>
+</li>
+</ul>
+<pre><code>@SpringBootApplication
+等同于
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan("top.wu.boot")
+</code></pre>
+<ul>
+<li>
+<p>各种配置拥有默认值</p>
+<ul>
+<li>默认配置最终都是映射到某个类上，如：MultipartProperties</li>
+<li>配置文件的值最终会绑定每个类上，这个类会在容器中创建对象</li>
+</ul>
+</li>
+<li>
+<p>按需加载所有自动配置项</p>
+</li>
+<li>
+<p>非常多的starter</p>
+</li>
+<li>
+<p>引入了哪些场景这个场景的自动配置才会开启</p>
+</li>
+<li>
+<p>SpringBoot所有的自动配置功能都在 spring-boot-autoconfigure 包里面</p>
+</li>
+<li></li>
+<li>
+<p>......</p>
+</li>
+</ul>
+<h1 id="toc_h1_3">2、容器功能</h1>
+<h2 id="toc_h2_4">2.1、组件添加</h2>
+<h3 id="toc_h3_5">1、@Configuration</h3>
+<ul>
+<li>
+<p>基本使用</p>
+</li>
+<li>
+<p><strong>Full模式（全配置）与Lite模式（轻量配置）</strong></p>
+<ul>
+<li>示例</li>
+<li>最佳实战</li>
+</ul>
+</li>
+<li>
+<p>配置 类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</p>
+</li>
+<li>
+<p>配置类组件之间有依赖关系，方法会被调用得到之前单实例组件，用Full模式</p>
+</li>
+</ul>
+<pre><code>#############################Configuration使用示例######################################################
+/**
+ * 1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的
+ * 2、配置类本身也是组件
+ * 3、proxyBeanMethods：代理bean的方法
+ *      Full(proxyBeanMethods = true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】
+ *      Lite(proxyBeanMethods = false)【每个@Bean方法被调用多少次返回的组件都是新创建的】
+ *      组件依赖必须使用Full模式默认。其他默认是否Lite模式
+ *
+ *
+ *
+ */
+@Configuration(proxyBeanMethods = false) //告诉SpringBoot这是一个配置类 == 配置文件
+public class MyConfig {
+
+    /**
+     * Full:外部无论对配置类中的这个组件注册方法调用多少次获取的都是之前注册容器中的单实例对象
+     * @return
+     */
+    @Bean //给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例
+    public User user01(){
+        User zhangsan = new User("zhangsan", 18);
+        //user组件依赖了Pet组件
+        zhangsan.setPet(tomcatPet());
+        return zhangsan;
+    }
+
+    @Bean("tom")
+    public Pet tomcatPet(){
+        return new Pet("tomcat");
+    }
+}
+
+
+################################@Configuration测试代码如下########################################
+@SpringBootApplication
+public class MainApplication {
+
+    public static void main(String[] args) {
+        //1、返回我们IOC容器
+        ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
+
+        //2、查看容器里面的组件
+        String[] names = run.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        //3、从容器中获取组件
+
+        Pet tom01 = run.getBean("tom", Pet.class);
+
+        Pet tom02 = run.getBean("tom", Pet.class);
+
+        System.out.println("组件："+(tom01 == tom02));
+
+
+        //4、top.wu.boot.config.MyConfig$$EnhancerBySpringCGLIB$$51f1e1ca@1654a892
+        MyConfig bean = run.getBean(MyConfig.class);
+        System.out.println(bean);
+
+        //如果@Configuration(proxyBeanMethods = true)代理对象调用方法。SpringBoot总会检查这个组件是否在容器中有。
+        //保持组件单实例
+        User user = bean.user01();
+        User user1 = bean.user01();
+        System.out.println(user == user1);
+
+
+        User user01 = run.getBean("user01", User.class);
+        Pet tom = run.getBean("tom", Pet.class);
+
+        System.out.println("用户的宠物："+(user01.getPet() == tom));
+
+
+
+    }
+}
+</code></pre>
+<h3 id="toc_h3_6">2、@Bean、@Component、@Controller、@Service、@Repository</h3>
+<h3 id="toc_h3_7">3、@ComponentScan、@Import</h3>
+<pre><code>* 4、@Import({User.class, DBHelper.class})
+ *      给容器中自动创建出这两个类型的组件、默认组件的名字就是全类名
+ *
+ *
+ *
+ */
+
+@Import({User.class, DBHelper.class})
+@Configuration(proxyBeanMethods = false) //告诉SpringBoot这是一个配置类 == 配置文件
+public class MyConfig {
+}
+</code></pre>
+<p>@Import 高级用法： <a href="https://www.bilibili.com/video/BV1gW411W7wy?p=8" target="_blank">https://www.bilibili.com/video/BV1gW411W7wy?p=8</a></p>
+<h3 id="toc_h3_8">4、@Conditional</h3>
+<p>条件装配：满足Conditional指定的条件，则进行组件注入</p>
+<p><img src="https://b3logfile.com/file/2021/02/solofetchupload8127028033331902327-134311ac.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></p>
+<pre><code>=====================测试条件装配==========================
+@Configuration(proxyBeanMethods = false) //告诉SpringBoot这是一个配置类 == 配置文件
+//@ConditionalOnBean(name = "tom")
+@ConditionalOnMissingBean(name = "tom")
+public class MyConfig {
+
+
+    /**
+     * Full:外部无论对配置类中的这个组件注册方法调用多少次获取的都是之前注册容器中的单实例对象
+     * @return
+     */
+
+    @Bean //给容器中添加组件。以方法名作为组件的id。返回类型就是组件类型。返回的值，就是组件在容器中的实例
+    public User user01(){
+        User zhangsan = new User("zhangsan", 18);
+        //user组件依赖了Pet组件
+        zhangsan.setPet(tomcatPet());
+        return zhangsan;
+    }
+
+    @Bean("tom22")
+    public Pet tomcatPet(){
+        return new Pet("tomcat");
+    }
+}
+
+public static void main(String[] args) {
+        //1、返回我们IOC容器
+        ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
+
+        //2、查看容器里面的组件
+        String[] names = run.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        boolean tom = run.containsBean("tom");
+        System.out.println("容器中Tom组件："+tom);
+
+        boolean user01 = run.containsBean("user01");
+        System.out.println("容器中user01组件："+user01);
+
+        boolean tom22 = run.containsBean("tom22");
+        System.out.println("容器中tom22组件："+tom22);
+
+
+    }
+</code></pre>
+<h2 id="toc_h2_9">2.2、原生配置文件引入</h2>
+<h3 id="toc_h3_10">1、@ImportResource</h3>
+<pre><code>======================beans.xml=========================
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"&gt;
+
+    &lt;bean id="haha" class="top.wu.boot.bean.User"&gt;
+        &lt;property name="name" value="zhangsan"&gt;&lt;/property&gt;
+        &lt;property name="age" value="18"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="hehe" class="top.wu.boot.bean.Pet"&gt;
+        &lt;property name="name" value="tomcat"&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<pre><code>@ImportResource("classpath:beans.xml")
+public class MyConfig {}
+
+======================测试=================
+        boolean haha = run.containsBean("haha");
+        boolean hehe = run.containsBean("hehe");
+        System.out.println("haha："+haha);//true
+        System.out.println("hehe："+hehe);//true
+</code></pre>
+<h2 id="toc_h2_11">2.3、配置绑定</h2>
+<p>如何使用Java读取到properties文件中的内容，并且把它封装到JavaBean中，以供随时使用；</p>
+<pre><code>public class getProperties {
+     public static void main(String[] args) throws FileNotFoundException, IOException {
+         Properties pps = new Properties();
+         pps.load(new FileInputStream("a.properties"));
+         Enumeration enum1 = pps.propertyNames();//得到配置文件的名字
+         while(enum1.hasMoreElements()) {
+             String strKey = (String) enum1.nextElement();
+             String strValue = pps.getProperty(strKey);
+             System.out.println(strKey + "=" + strValue);
+             //封装到JavaBean。
+         }
+     }
+ }
+</code></pre>
+<h3 id="toc_h3_12">1、@ConfigurationProperties</h3>
+<pre><code>/**
+ * 只有在容器中的组件，才会拥有SpringBoot提供的强大功能
+ */
+@Component
+@ConfigurationProperties(prefix = "mycar")
+public class Car {
+
+    private String brand;
+    private Integer price;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+</code></pre>
+<h3 id="toc_h3_13">2、@EnableConfigurationProperties + @ConfigurationProperties</h3>
+<p>在配置文件中开启@EnableConfigurationProperties，在属性类上标明@ConfigurationProperties</p>
+<h3 id="toc_h3_14">3、@Component + @ConfigurationProperties</h3>
+<pre><code>@EnableConfigurationProperties(Car.class)
+//1、开启Car配置绑定功能
+//2、把这个Car这个组件自动注册到容器中
+public class MyConfig {
+}
+</code></pre>
+<pre><code>//  只有在容器中的组件，才会拥有SpringBoot提供的强大功能 */ 
+@Component 
+@ConfigurationProperties(prefix = "mycar")
+</code></pre>
+<h1 id="toc_h1_15">3、自动配置原理入门</h1>
+<h2 id="toc_h2_16">3.1、引导加载自动配置类</h2>
+<pre><code>@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+        @Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public @interface SpringBootApplication{}
+
+
+======================
+</code></pre>
+<h3 id="toc_h3_17">1、@SpringBootConfiguration</h3>
+<p>@Configuration。代表当前是一个配置类</p>
+<h3 id="toc_h3_18">2、@ComponentScan</h3>
+<p>指定扫描哪些，Spring注解；</p>
+<h3 id="toc_h3_19">3、@EnableAutoConfiguration</h3>
+<pre><code>@AutoConfigurationPackage
+@Import(AutoConfigurationImportSelector.class)
+public @interface EnableAutoConfiguration {}
+</code></pre>
+<h4 id="toc_h4_20">1、@AutoConfigurationPackage</h4>
+<p>自动配置包？指定了默认的包规则</p>
+<pre><code>@Import(AutoConfigurationPackages.Registrar.class)  //给容器中导入一个组件
+public @interface AutoConfigurationPackage {}
+
+//利用Registrar给容器中导入一系列组件
+//将指定的一个包下的所有组件导入进来？主程序所在包下。
+</code></pre>
+<h4 id="toc_h4_21">2、@Import(AutoConfigurationImportSelector.class)</h4>
+<pre><code>1. 利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件
+2. 调用List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类
+3. 利用工厂加载 Map&lt;String, List&lt;String&gt;&gt; loadSpringFactories(@Nullable ClassLoader classLoader)；得到所有的组件
+4. 从META-INF/spring.factories位置来加载一个文件。
+    默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件
+    spring-boot-autoconfigure-2.3.4.RELEASE.jar包里面也有META-INF/spring.factories
+</code></pre>
+<h2 id="toc_h2_22"><img src="https://b3logfile.com/file/2021/02/solofetchupload3033858960769731591-f470c3ed.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></h2>
+<pre><code>文件里面写死了spring-boot一启动就要给容器中加载的所有配置类
+spring-boot-autoconfigure-2.3.4.RELEASE.jar/META-INF/spring.factories
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
+org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\
+org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\
+org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\
+org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\
+org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration,\
+org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration,\
+org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration,\
+org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration,\
+org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.cassandra.CassandraReactiveDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.cassandra.CassandraReactiveRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.cassandra.CassandraRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.couchbase.CouchbaseDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.couchbase.CouchbaseReactiveDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.couchbase.CouchbaseReactiveRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.couchbase.CouchbaseRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.elasticsearch.ReactiveElasticsearchRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.elasticsearch.ReactiveElasticsearchRestClientAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.jdbc.JdbcRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.ldap.LdapRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.mongo.MongoReactiveRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.neo4j.Neo4jRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.solr.SolrRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.r2dbc.R2dbcDataAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.r2dbc.R2dbcRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.r2dbc.R2dbcTransactionManagerAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration,\
+org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration,\
+org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration,\
+org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration,\
+org.springframework.boot.autoconfigure.groovy.template.GroovyTemplateAutoConfiguration,\
+org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration,\
+org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration,\
+org.springframework.boot.autoconfigure.hateoas.HypermediaAutoConfiguration,\
+org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration,\
+org.springframework.boot.autoconfigure.hazelcast.HazelcastJpaDependencyAutoConfiguration,\
+org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration,\
+org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration,\
+org.springframework.boot.autoconfigure.influx.InfluxDbAutoConfiguration,\
+org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration,\
+org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration,\
+org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.JndiDataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.XADataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,\
+org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration,\
+org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration,\
+org.springframework.boot.autoconfigure.jms.JndiConnectionFactoryAutoConfiguration,\
+org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration,\
+org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfiguration,\
+org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration,\
+org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration,\
+org.springframework.boot.autoconfigure.jsonb.JsonbAutoConfiguration,\
+org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,\
+org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration,\
+org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapAutoConfiguration,\
+org.springframework.boot.autoconfigure.ldap.LdapAutoConfiguration,\
+org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration,\
+org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration,\
+org.springframework.boot.autoconfigure.mail.MailSenderValidatorAutoConfiguration,\
+org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration,\
+org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\
+org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration,\
+org.springframework.boot.autoconfigure.mustache.MustacheAutoConfiguration,\
+org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,\
+org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration,\
+org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration,\
+org.springframework.boot.autoconfigure.rsocket.RSocketMessagingAutoConfiguration,\
+org.springframework.boot.autoconfigure.rsocket.RSocketRequesterAutoConfiguration,\
+org.springframework.boot.autoconfigure.rsocket.RSocketServerAutoConfiguration,\
+org.springframework.boot.autoconfigure.rsocket.RSocketStrategiesAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.rsocket.RSocketSecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyAutoConfiguration,\
+org.springframework.boot.autoconfigure.sendgrid.SendGridAutoConfiguration,\
+org.springframework.boot.autoconfigure.session.SessionAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.oauth2.client.reactive.ReactiveOAuth2ClientAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.oauth2.resource.reactive.ReactiveOAuth2ResourceServerAutoConfiguration,\
+org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration,\
+org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration,\
+org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration,\
+org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration,\
+org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration,\
+org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration,\
+org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.HttpHandlerAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.ReactiveWebServerFactoryAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.function.client.ClientHttpConnectorAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.reactive.function.client.WebClientAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration,\
+org.springframework.boot.autoconfigure.websocket.reactive.WebSocketReactiveAutoConfiguration,\
+org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration,\
+org.springframework.boot.autoconfigure.websocket.servlet.WebSocketMessagingAutoConfiguration,\
+org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration,\
+org.springframework.boot.autoconfigure.webservices.client.WebServiceTemplateAutoConfiguration
+</code></pre>
+<h2 id="toc_h2_23">3.2、按需开启自动配置项</h2>
+<pre><code>虽然我们127个场景的所有自动配置启动的时候默认全部加载。xxxxAutoConfiguration
+按照条件装配规则（@Conditional），最终会按需配置。
+</code></pre>
+<h2 id="toc_h2_24">3.3、修改默认配置</h2>
+<pre><code>@Bean
+        @ConditionalOnBean(MultipartResolver.class)  //容器中有这个类型组件
+        @ConditionalOnMissingBean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME) //容器中没有这个名字 multipartResolver 的组件
+        public MultipartResolver multipartResolver(MultipartResolver resolver) {
+            //给@Bean标注的方法传入了对象参数，这个参数的值就会从容器中找。
+            //SpringMVC multipartResolver。防止有些用户配置的文件上传解析器不符合规范
+            // Detect if the user has created a MultipartResolver but named it incorrectly
+            return resolver;
+        }
+给容器中加入了文件上传解析器；
+</code></pre>
+<h2 id="toc_h2_25"></h2>
+<p>SpringBoot默认会在底层配好所有的组件。但是如果用户自己配置了以用户的优先</p>
+<pre><code>@Bean
+    @ConditionalOnMissingBean
+    public CharacterEncodingFilter characterEncodingFilter() {
+    }
+</code></pre>
+<h2 id="toc_h2_26"></h2>
+<p>总结：</p>
+<ul>
+<li>SpringBoot先加载所有的自动配置类  xxxxxAutoConfiguration</li>
+<li>每个自动配置类按照条件进行生效，默认都会绑定配置文件指定的值。xxxxProperties里面拿。xxxProperties和配置文件进行了绑定</li>
+<li>生效的配置类就会给容器中装配很多组件</li>
+<li>只要容器中有这些组件，相当于这些功能就有了</li>
+<li>定制化配置
+<ul>
+<li>用户直接自己@Bean替换底层的组件</li>
+<li>用户去看这个组件是获取的配置文件什么值就去修改。</li>
+</ul>
+</li>
+</ul>
+<p>**xxxxxAutoConfiguration ---&gt; 组件  ---&gt; **<strong>xxxxProperties里面拿值  ----&gt; application.properties</strong></p>
+<h2 id="toc_h2_27">3.4、最佳实践</h2>
+<ul>
+<li>
+<p>引入场景依赖</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter" target="_blank">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</a></li>
+</ul>
+</li>
+<li>
+<p>查看自动配置了哪些（选做）</p>
+</li>
+<li>
+<p>自己分析，引入场景对应的自动配置一般都生效了</p>
+</li>
+<li>
+<p>配置文件中debug=true开启自动配置报告。Negative（不生效）\Positive（生效）</p>
+</li>
+<li>
+<p>是否需要修改</p>
+</li>
+<li>
+<p>参照文档修改配置项</p>
+</li>
+<li>
+<p><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties" target="_blank">https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#common-application-properties</a></p>
+</li>
+<li>
+<p>自己分析。xxxxProperties绑定了配置文件的哪些。</p>
+</li>
+<li>
+<p>自定义加入或者替换组件</p>
+</li>
+<li>
+<p>@Bean、@Component。。。</p>
+</li>
+<li>
+<p>自定义器  <strong>XXXXXCustomizer</strong>；</p>
+</li>
+<li>
+<p>......</p>
+</li>
+</ul>
+<h1 id="toc_h1_28">4、开发小技巧</h1>
+<h2 id="toc_h2_29">4.1、Lombok</h2>
+<p>简化JavaBean开发</p>
+<pre><code>&lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+
+idea中搜索安装lombok插件
+</code></pre>
+<pre><code>===============================简化JavaBean开发===================================
+@NoArgsConstructor
+//@AllArgsConstructor
+@Data
+@ToString
+@EqualsAndHashCode
+public class User {
+
+    private String name;
+    private Integer age;
+
+    private Pet pet;
+
+    public User(String name,Integer age){
+        this.name = name;
+        this.age = age;
+    }
+
+
+}
+
+
+
+================================简化日志开发===================================
+@Slf4j
+@RestController
+public class HelloController {
+    @RequestMapping("/hello")
+    public String handle01(@RequestParam("name") String name){
+        
+        log.info("请求进来了....");
+        
+        return "Hello, Spring Boot 2!"+"你好："+name;
+    }
+}
+</code></pre>
+<h2 id="toc_h2_30">4.2、dev-tools</h2>
+<pre><code>&lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>项目或者页面修改以后：Ctrl+F9；</p>
+<h2 id="toc_h2_31">4.3、Spring Initailizr（项目初始化向导）</h2>
+<h3 id="toc_h3_32">0、选择我们需要的开发场景</h3>
+<p><img src="https://b3logfile.com/file/2021/02/solofetchupload5170823749425879901-c4233eaa.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></p>
+<h3 id="toc_h3_33">1、自动依赖引入</h3>
+<p><img src="https://b3logfile.com/file/2021/02/solofetchupload5270724931243174571-306ca5a3.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></p>
+<h3 id="toc_h3_34">2、自动创建项目结构</h3>
+<p><img src="https://b3logfile.com/file/2021/02/solofetchupload5389796158193987930-206132e5.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></p>
+<h3 id="toc_h3_35">3、自动编写好主配置类</h3>
+<p><img src="https://b3logfile.com/file/2021/02/solofetchupload3512912563427236902-fc34d2f6.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100" alt="image.png" title="image.png"></p>
+                <div>
+                    <hr>
+
+标题：Spring Boot2自动配置<br>
+作者：<a href="https://wuruohui.github.io" target="_blank">WuRuoHui</a><br>
+地址：<a href="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html" target="_blank">https://wuruohui.github.io/articles/2021/02/04/1612452633654.html</a><br>
+
+<!-- 签名档内可使用 HTML、JavaScript -->
+<br>
+                </div>
+        </div>
+    </div>
+    <div class="post__toc">
+<ul class="article__toc">
+        <li class="toc__h1">
+            <a href="#toc_h1_0">1、SpringBoot特点</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_1">1.1、依赖管理</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_2">1.2、自动配置</a>
+        </li>
+        <li class="toc__h1">
+            <a href="#toc_h1_3">2、容器功能</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_4">2.1、组件添加</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_5">1、@Configuration</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_6">2、@Bean、@Component、@Controller、@Service、@Repository</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_7">3、@ComponentScan、@Import</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_8">4、@Conditional</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_9">2.2、原生配置文件引入</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_10">1、@ImportResource</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_11">2.3、配置绑定</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_12">1、@ConfigurationProperties</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_13">2、@EnableConfigurationProperties + @ConfigurationProperties</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_14">3、@Component + @ConfigurationProperties</a>
+        </li>
+        <li class="toc__h1">
+            <a href="#toc_h1_15">3、自动配置原理入门</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_16">3.1、引导加载自动配置类</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_17">1、@SpringBootConfiguration</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_18">2、@ComponentScan</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_19">3、@EnableAutoConfiguration</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_20">1、@AutoConfigurationPackage</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_21">2、@Import(AutoConfigurationImportSelector.class)</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_22"></a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_23">3.2、按需开启自动配置项</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_24">3.3、修改默认配置</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_25"></a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_26"></a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_27">3.4、最佳实践</a>
+        </li>
+        <li class="toc__h1">
+            <a href="#toc_h1_28">4、开发小技巧</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_29">4.1、Lombok</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_30">4.2、dev-tools</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_31">4.3、Spring Initailizr（项目初始化向导）</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_32">0、选择我们需要的开发场景</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_33">1、自动依赖引入</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_34">2、自动创建项目结构</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_35">3、自动编写好主配置类</a>
+        </li>
+</ul>    </div>
+    <div class="body--gray post__gray">
+        <div class="wrapper comment">
+                <div id="gitalk-container" style="padding: 30px 0;"></div>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="padding: 30px 0;" data-name="WuRuoHui" data-postId="1612452633127"></div>
+
+            <div class="post__list fn__flex">
+                <div class="fn__flex-1">
+                    <div id="externalRelevantArticles"></div>
+                </div>
+                <div class="post__list-mid fn__flex-1">
+                    <div id="randomArticles"></div>
+                </div>
+                <div class="fn__flex-1">
+                    <div id="relevantArticles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__fix">
+        <div class="wrapper">
+            <span class="post__share mobile__none">
+                Share
+                <span class="tag tag--4" data-type="weibo">WeiBo</span>
+                <span class="tag tag--5" data-type="twitter">Twitter</span>
+                <span class="tag tag--6" data-type="qqz">QZone</span>
+                <span class="post__code tag tag--7"
+                      data-type="wechat"
+                      data-title="Spring Boot2自动配置"
+                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-url="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html"
+                      data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                    WeChat
+                    <span class="qrcode"></span>
+                </span>
+            </span>
+            <span class="post__arrow">
+                    <a href="https://wuruohui.github.io/articles/2021/02/04/1612396619399.html" rel="prev"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Spring Boot2"
+                       aria-label="旧一篇: Spring Boot2">←</a>
+
+                    <a href="https://wuruohui.github.io/hello-solo" rel="next"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="世界，你好！"
+                       aria-label="新一篇: 世界，你好！">→</a>
+                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到顶部">↑</a>
+                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到底部">↓</a>
+            </span>
+        </div>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+    articleId: "1612452633127",
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    Util.addScript('https://wuruohui.github.io/js/page.min.js?1613894294256', 'soloPageScript')
+    var page = new Page({
+        "commentContentCannotEmptyLabel": "评论不能为空",
+        "oId": "1612452633127",
+        "blogHost": "https://wuruohui.github.io",
+        "randomArticles1Label": "随机阅读：",
+        "externalRelevantArticles1Label": "站外相关阅读："
+    });
+    $(document).ready(function () {
+        page.load();
+    page.tips.externalRelevantArticlesDisplayCount = "0";
+    page.loadRandomArticles('<h3>RECOMMEND POSTS</h3>');
+    page.loadRelevantArticles('1612452633127', '<h3>RELEVANT POSTS</h3>');
+Skin.initArticle()
+    });
+</script>
+
+</body>
+</html>
+
+<!-- Generated by Latke (https://github.com/88250/latke) in 59ms, 2021/02/21 15:59:55 -->

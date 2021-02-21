@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>集合 - WuRuoHui 的个人博客</title><meta name="description" content="集合、数组都是对于多个数据进行存储操作的结构，简称Java容器（内存层面的存储） 数组存储的特点： （1）一旦初始化之后，其长度就确定了 （2）数组一旦定义好，其元素的类型也就确定了 （3）数组中提供的方法非常有限 Collection接口 -- 单列集合，存储单个数据 通用方法： （1）add(E e) （2）size() （3）addAll(Collection c) （4）isEmpty() （5）clear() （6）contains(Object obj)：判断时会调用obj所在对象的equals()方法，自定义对象可重新该方法 （7）containsAll(Collection c) （8）remove(Object obj) （9）removeAll(Collection c) （10）retainAll(Collection c)：求交集并返回给当前集合 （11）equals(Collection c) （12）hashCode() （13）toArray() （14）iterator() 迭代器 （1）hasNext()：仍有元素可以迭代，则返回 （2）next()：...."/><meta property="og:description" content="集合、数组都是对于多个数据进行存储操作的结构，简称Java容器（内存层面的存储） 数组存储的特点： （1）一旦初始化之后，其长度就确定了 （2）数组一旦定义好，其元素的类型也就确定了 （3）数组中提供的方法非常有限 Collection接口 -- 单列集合，存储单个数据 通用方法： （1）add(E e) （2）size() （3）addAll(Collection c) （4）isEmpty() （5）clear() （6）contains(Object obj)：判断时会调用obj所在对象的equals()方法，自定义对象可重新该方法 （7）containsAll(Collection c) （8）remove(Object obj) （9）removeAll(Collection c) （10）retainAll(Collection c)：求交集并返回给当前集合 （11）equals(Collection c) （12）hashCode() （13）toArray() （14）iterator() 迭代器 （1）hasNext()：仍有元素可以迭代，则返回 （2）next()：...."/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="集合 - WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="集合 - WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">        <link rel="canonical" href="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html">        <link rel="stylesheet"
+              href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+            <link rel="prev" title="Java比较两个对象的大小" href="https://wuruohui.github.io/articles/2020/04/17/1587135816006.html">
+            <link rel="next" title="IO流" href="https://wuruohui.github.io/articles/2020/04/24/1587698269440.html">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body>
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
+
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="post wrapper wrapper--miner">
+        <h2 class="item__title">
+            <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html">
+                集合
+            </a>
+        </h2>
+        <div class="ft__fade item__meta">
+                Published on
+            <time>
+                Apr 19, 2020
+            </time>
+            with <span data-uvstaturl="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html">0</span> views
+                and <a href="#b3logsolocomments"><span data-uvstatcmt="1587308148086">0</span> comments</a>
+        </div>
+        <div class="item__tags">
+                <a rel="tag" class="tag tag--0" href="https://wuruohui.github.io/tags/Java">
+                    <b># Java</b>
+                </a>
+                <a rel="tag" class="tag tag--1" href="https://wuruohui.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+                    <b># 学习笔记</b>
+                </a>
+        </div>
+        <div class="vditor-reset">
+            <p>集合、数组都是对于多个数据进行存储操作的结构，简称Java容器（内存层面的存储）<br>
+数组存储的特点：<br>
+（1）一旦初始化之后，其长度就确定了<br>
+（2）数组一旦定义好，其元素的类型也就确定了<br>
+（3）数组中提供的方法非常有限</p>
+<h2 id="toc_h2_0">Collection接口 -- 单列集合，存储单个数据</h2>
+<p>通用方法：<br>
+（1）add(E e)<br>
+（2）size()<br>
+（3）addAll(Collection c)<br>
+（4）isEmpty()<br>
+（5）clear()<br>
+（6）contains(Object obj)：判断时会调用obj所在对象的equals()方法，自定义对象可重新该方法<br>
+（7）containsAll(Collection c)<br>
+（8）remove(Object obj)<br>
+（9）removeAll(Collection c)<br>
+（10）retainAll(Collection c)：求交集并返回给当前集合<br>
+（11）equals(Collection c)<br>
+（12）hashCode()<br>
+（13）toArray()<br>
+（14）iterator()</p>
+<h4 id="toc_h4_1">迭代器</h4>
+<p>（1）hasNext()：仍有元素可以迭代，则返回<br>
+（2）next()：返回迭代的下一个元素<br>
+（3）remove()</p>
+<p>如果还未调用next()或者在上次调用过next()后已经调用过remove()，再次调用remove()都会报错</p>
+<pre><code class="language-java">	List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Iterator&lt;Integer&gt; iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Integer next = iterator.next();
+            if (next == 2) {
+                iterator.remove();
+            }
+        }
+        iterator = list.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+</code></pre>
+<h3 id="toc_h3_2">List接口 -- 存储有序、可重复的数据</h3>
+<h4 id="toc_h4_3">ArrayList（主要实现类）</h4>
+<p>底层是object数组</p>
+<h5 id="toc_h5_4">源码区别：</h5>
+<p>JDK7：</p>
+<pre><code class="language-java">ArrayList list = new ArrayList();    //底层创建了长度是10的Object[]数组elementData
+list.add(123); //如果此次的添加导致底层elementData数组容量不够，则进行扩容，默认情况下，扩容为原来的1.5倍，同时将原有数组中的数据复制到新数组中
+</code></pre>
+<p>JDK8：</p>
+<pre><code class="language-java">ArrayList list = new ArrayList();    //底层Object[] elementData初始化为{}，并没有创建长度为10的数组
+list.add(123); //第一次调用add()时，底层才创建了长度为10的数组，后续的操作与1.7中的相同
+</code></pre>
+<h5 id="toc_h5_5">常用方法</h5>
+<p>（1）void add(int index, Object ele)：在index位置插入ele元素<br>
+（2）boolean addAll(int index, Collection eles)：从index位置开始讲eles中的所有元素添加进来<br>
+（3）Object get(int index)：获取指定index位置的元素<br>
+（4）int indexOf(Object obj)：返回obj在当前集合中末次出现的位置<br>
+（5）Object remove(int index, Object ele)：移除指定index位置的元素，并返回此元素<br>
+（6）Object set(int index, Object ele)：设置指定index位置的元素为ele<br>
+（7）List sublist(int fromIndex, int toIndex)：返回从fromIndex到toIndex位置的子集合</p>
+<h4 id="toc_h4_6">LinkList</h4>
+<p>底层是双向链表，频繁的插入、删除操作，此类比ArrayList效率高</p>
+<pre><code class="language-java">private static class Node&lt;E&gt; {
+        E item;
+        Node&lt;E&gt; next;
+        Node&lt;E&gt; prev;
+
+        Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+</code></pre>
+<h4 id="toc_h4_7">Vector</h4>
+<p>底层是object数组</p>
+<p>默认创建长度为10的数组，扩容时变为原来的2倍</p>
+<h3 id="toc_h3_8">Set接口 -- 存储无序、不可重复的数据</h3>
+<p>无序性：不等于随机性，存储的数据在底层数组中并非按照数组索引的顺序添加，而是根据数据的hash值决定的</p>
+<p>不可重复性：保证添加的元素按照equals()判断时，不能返回true，相同元素只能添加一个</p>
+<h5 id="toc_h5_9">添加元素的过程</h5>
+<p>向HashSet中添加元素a，首先调用元素a所在类的hashCode()方法，计算元素a的hash值，此hash值通过某种算法计算出在HashSet底层数组中的存放位置（即为索引位置），判断此位置上是否已经元素，如果没有其他元素，则添加成功，如果有其他元素，则比较hash值，若hash不同，则添加成功，否则需要再调用元素a所在类的equals()方法，返回true则添加失败，返回false则添加成功</p>
+<p>对于同个位置存放多个元素而言，该位置以链表形式存储</p>
+<p>JDK7：元素a放到数组中，指向原来的元素</p>
+<p>JDK8：原来的元素在数组中，指向a元素</p>
+<h4 id="toc_h4_10">HashSet</h4>
+<p>底层是数组加链表的形式，线程不安全的，可以存储null值</p>
+<p>向Set中添加数据，其所在的类一定要重写hashCode()和equals()方法，重写的hashCode()和equals()尽可能保持一致性：相等的对象必须具有相等的散列码</p>
+<h4 id="toc_h4_11">LinkedHashSet</h4>
+<p>HashSet的子类，遍历内部数据时，可以按照添加顺序进行遍历，在添加数据的同时，每个数据还维护着两个变量，记录此数据的前一个和后一个数据，对于频繁的遍历操作，效率高于HahsSet</p>
+<h4 id="toc_h4_12">TreeSet</h4>
+<p>底层是红黑树，可以按照添加元素的指定属性进行排序</p>
+<p>向TreeSet中添加数据，要求是同一类型的数据</p>
+<h5 id="toc_h5_13">排序</h5>
+<p>自然排序：比较两个对象是否相同的方法是compareTo()不再是equals()</p>
+<p>定制排序：比较两个对象是否相同的方法是compare()不再是equals()</p>
+<p>在TreeSet的构造器中传入实现的Comparator对象</p>
+<h2 id="toc_h2_14">Map接口</h2>
+<h4 id="toc_h4_15">对Map结构的理解</h4>
+<p>Map中的key：无序的、不可重复的，使用set存储所有的key  --&gt; 要重写自定义类的hashCode()和equals()方法（以HashMap来说）<br>
+Map中的value：无序的、可重复的 --&gt; 重写equals()方法<br>
+一个键值对：key-value构成了一个Entry对象，无序的、不可重复，使用Set存储所有的Entry</p>
+<h4 id="toc_h4_16">常用方法</h4>
+<p>（1）Object put(Object key,Object value)：将指定key-value添加到（或修改）当前的Map对象中<br>
+（2）void putAll(Map m)：将m中的所有key-value对存放到当前map中<br>
+（3）Object remove(Object key)：移除指定key的key-value对，并返回value<br>
+（4）void clear()：清空当前map中的所有数据<br>
+（5）Object get(Object key)：获取指定key对应的value<br>
+（6）boolean containsKey(Object key)：是否包含指定key<br>
+（7）boolean containsValue(Object value)：是否包含指定value<br>
+（8）int size()：返回map中key-value对的个数<br>
+（9）boolean isEmpty()：判断map是否为空<br>
+（10）boolean keySet()：返回当前所有key构成的Set集合<br>
+（11）Collection values()：返回所有value构成的Collection集合<br>
+（12）Set entrySet()：返回所有key-value对构成的Set集合</p>
+<pre><code class="language-java">	Map&lt;Integer,Integer&gt; map = new HashMap();
+        map.put(1,11);
+        map.put(2,22);
+        map.put(3,33);
+        map.put(4,44);
+        Set&lt;Integer&gt; keySet = map.keySet();
+        for (Integer key : keySet) {
+            System.out.println(key);
+        }
+
+        Collection&lt;Integer&gt; values = map.values();
+        for (Integer value : values) {
+            System.out.println(value);
+        }
+
+        Set&lt;Map.Entry&lt;Integer, Integer&gt;&gt; entries = map.entrySet();
+        for (Map.Entry&lt;Integer,Integer&gt; entry : entries) {
+            System.out.println(entry.getKey() +":" +entry.getValue());
+        }
+</code></pre>
+<h3 id="toc_h3_17">HashMap</h3>
+<p>线程不安全，效率高，可以存储null的key和value</p>
+<p>底层使用数组+链表（JDK7及之前），JDK8使用数组+链表+红黑树</p>
+<h4 id="toc_h4_18">底层实现原理</h4>
+<p><code>HashMap map = new HashMap()</code><br>
+在实例化之后，底层创建了一个长度是16的一位数组Entry[] table<br>
+map.put(key1,value1)（可能已经执行过多次put）<br>
+首先，调用key1所在类的hashCode()计算key1哈希值，此哈希值通过某种算法计算后得到在Entry数组中的存放位置<br>
+如果此位置上的数据为空，此时key1-value1添加成功<br>
+如果此位置上的数据不为空，（意味着此位置上存在一个或者多个数据（以链表形式存储）），比较key1和已经存在的一个或者多个数据的哈希值，如果key1的哈希值与已存在的不同，此时key1-value1添加成功，如果相同则调用equals()方法，equals()返回false则添加成功，返回true则将value1替换原来的value值</p>
+<p>扩容问题：扩容为原来的2倍，并将原有数据复制过来</p>
+<h4 id="toc_h4_19">JDK8在底层实现的不同：</h4>
+<p>（1）new HashMap：底层没有创建一个长度为16的数组<br>
+（2）JDK8底层的数组是：Node[]，而非Entry[]<br>
+（3）首次调用put()方法时，底层创建长度为16的数组<br>
+（4）JDK7数据结构只有：数组+链表。JDK8中底层结构：数组+链表+红黑树<br>
+某数组的某一个索引位置上的元素以链表形式存在的个数 &gt; 8 且当前数组长度 &gt; 64时，此索引位置上的所有数据使用红黑树存储</p>
+<p>DEFAULT_INITIAL_CAPACITY：HashMap的默认容量，16<br>
+DEFAULT_LOAD_FACTOR：HashMap的默认加载因子，0.75<br>
+threshold：扩容的临界值，=容量<em>加载因子，16</em>0.75=12<br>
+TREEIFY_THRESHOLD：Bucket中链表长度大于该默认值，转化为红黑树，8<br>
+MIN_TREEIFY_CAPACITY：桶中的Node被树化时最小的hash表容量，64</p>
+<h3 id="toc_h3_20">LinkedHashMap</h3>
+<p>保证在遍历map元素时，可以按照添加的顺序实现遍历（在HashMap底层结构基础上，增加了一对指针，指向了前一个和后一个元素），频繁的遍历操作，效率比HashMap高</p>
+<h4 id="toc_h4_21">底层实现原理</h4>
+<pre><code class="language-java">static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
+        Entry&lt;K,V&gt; before, after;   //能够记录元素添加的先后顺序
+        Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+            super(hash, key, value, next);
+        }
+    }
+</code></pre>
+<h3 id="toc_h3_22">TreeMap</h3>
+<p>底层使用红黑树</p>
+<p>保证按照添加的key-value对进行排序，实现排序遍历（按照key来排）</p>
+<h3 id="toc_h3_23">HashTable</h3>
+<p>线程安全，效率低，不能存储null的key和value</p>
+<h4 id="toc_h4_24">Properties</h4>
+<p>常用来处理配置文件，key、value均为String类型</p>
+<pre><code class="language-java">        Properties properties = new Properties();
+        FileInputStream fileInputStream = new FileInputStream("src/jdbc.properties");
+        properties.load(fileInputStream);
+        String name = properties.getProperty("name");
+        System.out.println(name);
+</code></pre>
+<h2 id="toc_h2_25">Collections</h2>
+<p>Collections是一个操作Set、List和Map等集合的工具类</p>
+<p>（1）reverse(List)：反转List中元素的顺序<br>
+（2）shuffle(List)：对List集合元素进行随机排序<br>
+（3）sort(List)：根据元素的自然顺序对指定的List集合按升序排序<br>
+（4）sort(List,Comparator)：根据指定的Comparator产生的顺序对List集合进行排序<br>
+（5）swap(List,int,int)：将指定List集合中的i处元素和j处元素进行交换<br>
+（6）Object max(Collection)：根据元素的自然排序，返回给定集合中的最大元素<br>
+（7）Object max(Collection,Comparator)：根据Comparator指定的顺序，返回给定集合中的最大元素<br>
+（8）Object min(Collection)<br>
+（9）Object min(Collection,Comparator)<br>
+（10）int frequency(Collection,Object)：返回指定集合中指定元素出现的次数<br>
+（11）void copy(List dest,List src)：将src中的内容复制到dest中</p>
+<pre><code class="language-java">        List src = new ArrayList();
+        src.add(1);
+        src.add(2);
+        src.add(3);
+
+        List dest = Arrays.asList(new Object[src.size()]);
+        Collections.copy(dest,src);
+</code></pre>
+<p>（12）boolean replaceAll(List list,Object oldVal,Object newVal)：使用新值替换List对象中的所有旧值<br>
+（13）static<t> Collection<t> synchronizedCollection：返回指定 collection 支持的同步（线程安全的）collection。<br>
+（14）static<t> List<t> synchronizedList：返回指定列表支持的同步（线程安全的）列表。<br>
+（15）static &lt;K,V&gt; Map&lt;K,V&gt; synchronizedMap：返回由指定映射支持的同步（线程安全的）映射。<br>
+（16）static<t> Set<t> synchronizedSet：指定 set 支持的同步（线程安全的）set。<br>
+（17）static &lt;K,V&gt; SortedMap&lt;K,V&gt; synchronizedSortedMap：返回指定有序映射支持的同步（线程安全的）有序映射。<br>
+（18）static<t> SortedSet<t> synchronizedSortedSet返回指定有序 set 支持的同步（线程安全的）有序 set。</t></t></t></t></t></t></t></t></p>
+                <div>
+                    <hr>
+
+标题：集合<br>
+作者：<a href="https://wuruohui.github.io" target="_blank">WuRuoHui</a><br>
+地址：<a href="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html" target="_blank">https://wuruohui.github.io/articles/2020/04/19/1587308148343.html</a><br>
+
+<!-- 签名档内可使用 HTML、JavaScript -->
+<br>
+                </div>
+        </div>
+    </div>
+    <div class="post__toc">
+<ul class="article__toc">
+        <li class="toc__h2">
+            <a href="#toc_h2_0">Collection接口 -- 单列集合，存储单个数据</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_1">迭代器</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_2">List接口 -- 存储有序、可重复的数据</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_3">ArrayList（主要实现类）</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_4">源码区别：</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_5">常用方法</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_6">LinkList</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_7">Vector</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_8">Set接口 -- 存储无序、不可重复的数据</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_9">添加元素的过程</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_10">HashSet</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_11">LinkedHashSet</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_12">TreeSet</a>
+        </li>
+        <li class="toc__h5">
+            <a href="#toc_h5_13">排序</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_14">Map接口</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_15">对Map结构的理解</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_16">常用方法</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_17">HashMap</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_18">底层实现原理</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_19">JDK8在底层实现的不同：</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_20">LinkedHashMap</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_21">底层实现原理</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_22">TreeMap</a>
+        </li>
+        <li class="toc__h3">
+            <a href="#toc_h3_23">HashTable</a>
+        </li>
+        <li class="toc__h4">
+            <a href="#toc_h4_24">Properties</a>
+        </li>
+        <li class="toc__h2">
+            <a href="#toc_h2_25">Collections</a>
+        </li>
+</ul>    </div>
+    <div class="body--gray post__gray">
+        <div class="wrapper comment">
+                <div id="gitalk-container" style="padding: 30px 0;"></div>
+                <div id="b3logsolocomments"></div>
+                <div id="vcomment" style="padding: 30px 0;" data-name="WuRuoHui" data-postId="1587308148086"></div>
+
+            <div class="post__list fn__flex">
+                <div class="fn__flex-1">
+                    <div id="externalRelevantArticles"></div>
+                </div>
+                <div class="post__list-mid fn__flex-1">
+                    <div id="randomArticles"></div>
+                </div>
+                <div class="fn__flex-1">
+                    <div id="relevantArticles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__fix">
+        <div class="wrapper">
+            <span class="post__share mobile__none">
+                Share
+                <span class="tag tag--4" data-type="weibo">WeiBo</span>
+                <span class="tag tag--5" data-type="twitter">Twitter</span>
+                <span class="tag tag--6" data-type="qqz">QZone</span>
+                <span class="post__code tag tag--7"
+                      data-type="wechat"
+                      data-title="集合"
+                      data-blogtitle="WuRuoHui 的个人博客"
+                      data-url="https://wuruohui.github.io/articles/2020/04/19/1587308148343.html"
+                      data-avatar="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                    WeChat
+                    <span class="qrcode"></span>
+                </span>
+            </span>
+            <span class="post__arrow">
+                    <a href="https://wuruohui.github.io/articles/2020/04/17/1587135816006.html" rel="prev"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="Java比较两个对象的大小"
+                       aria-label="旧一篇: Java比较两个对象的大小">←</a>
+
+                    <a href="https://wuruohui.github.io/articles/2020/04/24/1587698269440.html" rel="next"
+                       class="vditor-tooltipped__n vditor-tooltipped"
+                       pjax-title="IO流"
+                       aria-label="新一篇: IO流">→</a>
+                <a href="javascript:Util.goTop()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到顶部">↑</a>
+                <a href="javascript:Util.goBottom()" class="vditor-tooltipped__n vditor-tooltipped"
+                   aria-label="移动到底部">↓</a>
+            </span>
+        </div>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+    articleId: "1587308148086",
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    Util.addScript('https://wuruohui.github.io/js/page.min.js?1613894294256', 'soloPageScript')
+    var page = new Page({
+        "commentContentCannotEmptyLabel": "评论不能为空",
+        "oId": "1587308148086",
+        "blogHost": "https://wuruohui.github.io",
+        "randomArticles1Label": "随机阅读：",
+        "externalRelevantArticles1Label": "站外相关阅读："
+    });
+    $(document).ready(function () {
+        page.load();
+    page.tips.externalRelevantArticlesDisplayCount = "0";
+    page.loadRandomArticles('<h3>RECOMMEND POSTS</h3>');
+    page.loadRelevantArticles('1587308148086', '<h3>RELEVANT POSTS</h3>');
+Skin.initArticle()
+    });
+</script>
+
+</body>
+</html>
+
+<!-- Generated by Latke (https://github.com/88250/latke) in 26ms, 2021/02/21 15:59:55 -->

@@ -1,18 +1,652 @@
----
-layout: default
-title: Wu's Blog
-page-title: Wu's Blog
-home-title: 你好
-description: 我是一只小萌新
----
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="theme-color" content="#3b3e43"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no"/><title>WuRuoHui 的个人博客</title><meta name="description" content="A small and beautiful blogging system. 一款小而美的博客系统。"/><meta property="og:description" content="A small and beautiful blogging system. 一款小而美的博客系统。"/>    <meta name="keywords" content="Solo,Java,博客,开源"/><link rel="dns-prefetch" href="https://wuruohui.github.io"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://wuruohui.github.io"><link rel="icon" type="image/png" href="https://b3log.org/images/brand/solo-128.png"/><link rel="apple-touch-icon" href="https://b3log.org/images/brand/solo-128.png"><link rel="shortcut icon" type="image/x-icon" href="https://b3log.org/images/brand/solo-128.png"><meta name="copyright" content="B3log"/><meta http-equiv="Window-target" content="_top"/><meta property="og:locale" content="zh_CN"/><meta property="og:title" content="WuRuoHui 的个人博客"/><meta property="og:site_name" content="WuRuoHui 的个人博客"/><meta property="og:url"      content="https://wuruohui.github.io/index.html?"/><meta property="og:image" content="https://b3log.org/images/brand/solo-128.png"/><link rel="search" type="application/opensearchdescription+xml" title="WuRuoHui 的个人博客" href="/opensearch.xml"><link href="https://wuruohui.github.io/rss.xml" title="RSS" type="application/rss+xml" rel="alternate"/><link rel="manifest" href="https://wuruohui.github.io/manifest.json">            <link rel="canonical" href="https://wuruohui.github.io/index.html">        <link rel="stylesheet" href="https://wuruohui.github.io/skins/Pinghsu/css/base.css?1613894294256"/>
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.6.6/dist/js/icons/ant.js" async="" id="vditorIconScript"></script></head>
+<body class="body--gray">
+<header class="header">
+    <div class="wrapper">
+        <a href="https://wuruohui.github.io" rel="start" class="header__logo">
+            <img src="https://img.hacpai.com/avatar/1583717982177_1583772537638.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100" alt="WuRuoHui 的个人博客"/>
+            WuRuoHui 的个人博客
+        </a>
 
-{% include header.html %}
-{% include boot.html %}
-<main>
-    {% include title.html %}
-    <ul class="post-list">
-      {% include posts_paginator.html %}
-    </ul>
+        <nav class="header__nav mobile__none">
+            <a href="https://wuruohui.github.io/tags.html" rel="section">
+                Tags
+            </a>
+            <a href="https://wuruohui.github.io/archives.html">
+                Archives
+            </a>
+            <a rel="archive" href="https://wuruohui.github.io/links.html">
+                Links
+            </a>
+        </nav>
+
+        <div class="header__bar fn__none" onclick="$(this).next().slideToggle()">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path fill="#444" d="M0 3h20v2h-20v-2zM0 9h20v2h-20v-2zM0 15h20v2h-20v-2z"></path>
+            </svg>
+        </div>
+        <main class="header__menu fn__none">
+            <ul>
+                <li>
+                    <a href="https://wuruohui.github.io/tags.html" rel="section">
+                        Tags
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wuruohui.github.io/archives.html">
+                        Archives
+                    </a>
+                </li>
+                <li>
+                    <a rel="archive" href="https://wuruohui.github.io/links.html">
+                        Links
+                    </a>
+                </li>
+                <li>
+                    <a rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </main>
+    </div>
+</header>
+<main id="pjax" class="fn__flex-1">
+    
+    <div class="wrapper wrapper--min">
+<main class="article-list fn__clear">
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20190118.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="世界，你好！" href="https://wuruohui.github.io/hello-solo">
+                        Solo 博客系统已经初始化完毕，可在管理后台 - 工具 - 偏好设定中调整更多细节设置。如果需要导入已有博客文章，请参考文档 Solo 支持 Hexo/Jekyll 数据导入。 对了，出于安全考虑请尽快完成如下操作：  登录链滴社区后，在个人设置 - B3 中更新 B3 Key 在 Solo 管理后台 - 工具 - 用户管理中也进行同样的 B3 Key 更新  另外，如果你需要开启评论系统，请参考 Solo 集成 Gitalk 评论系统。 最后，如果你觉得 Solo 很赞的话，请到项目主页 Watch、Star、Fork 三连 😍
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/hello-solo">
+                            世界，你好！
+                        </a>
+                    </h2>
+                            <div class="ico ico--0"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Solo">
+                                    Solo
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2021/02/solofetchupload8127028033331902327-134311ac.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot2自动配置" href="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html">
+                        1、SpringBoot特点 1.1、依赖管理 父项目做依赖管理 依赖管理 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 他的父项目 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt; &lt;version&gt;2.3.4.RELEASE&lt;/version&gt; &lt;/parent&gt; 几乎声明了所有开发中常用的依赖的版本号,自动版本仲裁机制 开发导入starter场景启动器 1. 见到很多 spring-....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2021/02/04/1612452633654.html">
+                            Spring Boot2自动配置
+                        </a>
+                    </h2>
+                            <div class="ico ico--1"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot2">
+                                    SpringBoot2
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2021/02/solofetchupload1620669083251881989-76e62460.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot2" href="https://wuruohui.github.io/articles/2021/02/04/1612396619399.html">
+                        01、Spring与SpringBoot 1、Spring能做什么 1.1、Spring的能力 1.2、Spring的生态 https://spring.io/projects/spring-boot 覆盖了： web开发 数据访问 安全控制 分布式 消息服务 移动开发 批处理 ...... 1.3、Spring5重大升级 1.3.1、响应式编程 1.3.2、内部源码设计 基于Java8的一些新特性，如：接口默认实现。重新设计源码架构。 2、为什么用SpringBoot Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". 能快速创建出生产级别的Spring应用 2.1、SpringBoot优点 Create stand-alone Spring applications 创建独立Spring应用 Embed Tomcat, Jetty or Undertow directly (no n....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2021/02/04/1612396619399.html">
+                            Spring Boot2
+                        </a>
+                    </h2>
+                            <div class="ico ico--2"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot2">
+                                    SpringBoot2
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20200513.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Security" href="https://wuruohui.github.io/articles/2021/02/03/1612338859541.html">
+                        依赖 &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.2.1.RELEASE&lt;/version&gt; &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt; &lt;/parent&gt; &lt;properties&gt; &lt;java.version&gt;1.8&lt;/java.version&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifact....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2021/02/03/1612338859541.html">
+                            Spring Security
+                        </a>
+                    </h2>
+                            <div class="ico ico--3"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2021/01/IMG0102-5224c132.jpeg?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="2021-1-13-茂名" href="https://wuruohui.github.io/articles/2021/01/13/1610506947417.html">
+                        该文章已经加密。
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2021/01/13/1610506947417.html">
+                            2021-1-13-茂名
+                        </a>
+                    </h2>
+                            <div class="ico ico--4"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/%E9%9A%8F%E7%AC%94">
+                                    随笔
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/image-dd1e0c37.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot热部署、监控管理" href="https://wuruohui.github.io/articles/2020/12/30/1609329681201.html">
+                        热部署 &lt;!-- 开启热部署 --&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt; &lt;optional&gt;true&lt;/optional&gt; &lt;/dependency&gt; 1.setting中compiler开启 Build project automatically 2.Ctrl+Alt+Shift+? -&gt; 点击Registry -&gt; 打开Compiler.automake.allow.when.app.running 监控管理 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt; &amp....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/30/1609329681201.html">
+                            Spring Boot热部署、监控管理
+                        </a>
+                    </h2>
+                            <div class="ico ico--5"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/image-d6ba88d1.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与分布式" href="https://wuruohui.github.io/articles/2020/12/27/1609000344400.html">
+                        Spring Boot与dubbo ZooKeeper ZooKeeper 是一个分布式的，开放源码的分布式应用程序协调服务。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。 Dubbo Dubbo是Alibaba开源的分布式服务框架，它最大的特点是按照分层的方式来架构，使用这种方式可以使各个层之间解耦合（或者最大限度地松耦合）。从服务模型的角度来看，Dubbo采用的是一种非常简单的模型，要么是提供方提供服务，要么是消费方消费服务，所以基于这一点可以抽象出服务提供方（Provider）和服务消费方（Consumer）两个角色。 docker下载zookeeper 启动zookeeper docker run --name some-zookeeper -p 2181:2181 --restart always -d zookeeper 导入依赖 &lt;!-- Dubbo Spring Boot Starter --&gt; &lt;dependency&gt; &lt;groupId&gt;org.apache.dubbo....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/27/1609000344400.html">
+                            Spring Boot与分布式
+                        </a>
+                    </h2>
+                            <div class="ico ico--6"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20180606.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与安全" href="https://wuruohui.github.io/articles/2020/12/26/1608991818381.html">
+                        “认证”（Authentication），是建立一个他声明的主体的过程（一个“主体”一般是指用户，设备或一些可以在你的应用程序中执行动作的其他系统）。 “授权”（Authorization）指确定一个主体是否允许在你的应用程序执行一个动作的过程。为了抵达需要授权的店，主体的身份已经有认证过程建立。 SpringSecurity与SpringMVC 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.security&lt;/groupId&gt; &lt;artifactId&gt;spring-security-taglibs&lt;/artifactId&gt; &lt;version&gt;5.1.5.RELEASE&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.security&lt;/groupId&gt; &lt;artifactId&gt;spring-security-conf....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/26/1608991818381.html">
+                            Spring Boot与安全
+                        </a>
+                    </h2>
+                            <div class="ico ico--7"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20181207.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与任务" href="https://wuruohui.github.io/articles/2020/12/24/1608769224234.html">
+                        异步任务 @EnableAsync //开启异步注解 public class SpringbootdemoApplication { @Async //异步方法 public void async() { try { Thread.sleep(3000); } catch (InterruptedException e) { e.printStackTrace(); } System.out.println("处理中"); } 定时任务 Spring为我们提供了异步执行任务调度的方式，提供TaskExecutor 、TaskScheduler 接口。 两个注解：@EnableScheduling、@Scheduled cron表达式： 字段允许值允许的特殊字符 秒0-59, - * / 分0-59, - * / 小时0-23, - * / 日期1-31, - * ? / L W C 月份1-12, - * / 星期0-7或SUN-SAT 0,7是SUN, - * ? / L C # 特殊字符代表含义 ,枚举 -区间 *任意 /步长 ?日/星期冲突匹配 L最后....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/24/1608769224234.html">
+                            Spring Boot与任务
+                        </a>
+                    </h2>
+                            <div class="ico ico--8"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/image-5b05ad94.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与检索" href="https://wuruohui.github.io/articles/2020/12/23/1608711683692.html">
+                        Elasticsearch是一个分布式搜索服务，提供Restful API，底层基于Lucene，采用多shard（分片）的方式保证数据安全，并且提供自动resharding的功能，github等大型的站点也是采用了ElasticSearch作为其搜索服务， 安装 dokcer pull elasticsearch docker run -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -d -p 9200:9200 -p 9300:9300 --name 容器名称 镜像id -e设置了内存大小，防止测试环境内存不够导致启动失败，9200是默认端口 -e "discovery.type=single-node"单节点部署 Elasticsearch: 权威指南 https://www.elastic.co/guide/cn/elasticsearch/guide/2.x/index-doc.html 存储数据到 Elasticsearch 的行为叫做 索引 一个 Elasticsearch 集群可以 包含多个 索引 ，相应的每个索引可以包含多个 类型 。 这些不同....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/23/1608711683692.html">
+                            Spring Boot与检索
+                        </a>
+                    </h2>
+                            <div class="ico ico--9"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Elasticsearch">
+                                    Elasticsearch
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/image-cd58a1b1.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与消息" href="https://wuruohui.github.io/articles/2020/12/12/1607788374929.html">
+                        大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力 消息服务中两个重要概念： 消息代理（message broker）和目的地（destination） 当消息发送者发送消息以后，将由消息代理接管，消息代理保证消息传递到指定目的地。 消息队列主要有两种形式的目的地 队列（queue）：点对点消息通信（point-to-point） 主题（topic）：发布（publish）/订阅（subscribe）消息通信 点对点式： 消息发送者发送消息，消息代理将其放入一个队列中，消息接收者从队列中获取消息内容，消息读取后被移出队列 消息只有唯一的发送者和接受者，但并不是说只能有一个接收者 发布订阅式： 发送者（发布者）发送消息到主题，多个接收者（订阅者）监听（订阅）这个主题，那么就会在消息到达时同时收到消息 消息规范 （1）JMS（Java Message Service）JAVA消息服务： 基于JVM消息代理的规范。ActiveMQ、HornetMQ是JMS实现 （2）AMQP（Advanced Message Queuing Protocol） 高级消息队列协议，....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/12/1607788374929.html">
+                            Spring Boot与消息
+                        </a>
+                    </h2>
+                            <div class="ico ico--0"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/image-9b2c5e93.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与缓存" href="https://wuruohui.github.io/articles/2020/12/09/1607513352385.html">
+                        JSR107 Java Caching定义了5个核心接口，分别是CachingProvider, CacheManager, Cache, Entry 和 Expiry。 CachingProvider定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期访问多个CachingProvider。 CacheManager定义了创建、配置、获取、管理和控制多个唯一命名的Cache，这些Cache存在于CacheManager的上下文中。一个CacheManager仅被一个CachingProvider所拥有。 Cache是一个类似Map的数据结构并临时存储以Key为索引的值。一个Cache仅被一个CacheManager所拥有。 Entry是一个存储在Cache中的key-value对。 Expiry 每一个存储在Cache中的条目有一个定义的有效期。一旦超过这个时间，条目为过期的状态。一旦过期，条目将不可访问、更新和删除。缓存有效期可以通过ExpiryPolicy设置。 JSR-107规范 提取码:uAjL Spring缓存抽象 Cache缓存接....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/09/1607513352385.html">
+                            Spring Boot与缓存
+                        </a>
+                    </h2>
+                            <div class="ico ico--1"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/12/搜狗截图20180306145727-86836c52.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot启动配置原理" href="https://wuruohui.github.io/articles/2020/12/09/1607480028114.html">
+                        几个重要的事件回调机制 配置在 META-INF/spring.factories ApplicationContextInitializer SpringApplicationRunListener 只需要放在 IoC 容器中 ApplicationRunner CommandLineRunner 启动流程： 1、创建 SpringApplication 对象 initialize(sources); private void initialize(Object[] sources) { //保存主配置类 if (sources != null &amp;&amp; sources.length &gt; 0) { this.sources.addAll(Arrays.asList(sources)); } //判断当前是否一个web应用 this.webEnvironment = deduceWebEnvironment(); //从类路径下找到META-INF/spring.factories配置的所有ApplicationContextInitializer；然后保存起来 se....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/09/1607480028114.html">
+                            Spring Boot启动配置原理
+                        </a>
+                    </h2>
+                            <div class="ico ico--2"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20200908.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与数据访问" href="https://wuruohui.github.io/articles/2020/12/06/1607214139317.html">
+                        JDBC &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;/dependency&gt; 错误 java.sql.SQLException: The server time zone value '�й���׼ʱ��' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configu.....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/12/06/1607214139317.html">
+                            Spring Boot与数据访问
+                        </a>
+                    </h2>
+                            <div class="ico ico--3"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(images/搜狗截图20180203181751.png?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与Web" href="https://wuruohui.github.io/articles/2020/11/26/1606349708094.html">
+                        1、简介 使用SpringBoot； 1）、创建SpringBoot应用，选中我们需要的模块； 2）、SpringBoot已经默认将这些场景配置好了，只需要在配置文件中指定少量配置就可以运行起来 3）、自己编写业务代码； 自动配置原理？ 这个场景SpringBoot帮我们配置了什么？能不能修改？能修改哪些配置？能不能扩展？xxx xxxxAutoConfiguration：帮我们给容器中自动配置组件； xxxxProperties:配置类来封装配置文件的内容； 2、SpringBoot对静态资源的映射规则； @ConfigurationProperties(prefix = "spring.resources", ignoreUnknownFields = false) public class ResourceProperties implements ResourceLoaderAware { //可以设置和静态资源有关的参数，缓存时间等 WebMvcAuotConfiguration： @Override public void addResourceHandlers(Res......
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/11/26/1606349708094.html">
+                            Spring Boot与Web
+                        </a>
+                    </h2>
+                            <div class="ico ico--4"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/11/image-c95ce111.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot与日志" href="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html">
+                        市面上的日志框架：JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j... | 日志门面 （日志的抽象层） | 日志实现 | | - | - | | JCL（Jakarta Commons Logging） SLF4j（Simple Logging Facade for Java） jboss-logging | Log4j JUL（java.util.logging） Log4j2 Logback | 左边选一个门面（抽象层）、右边来选一个实现； 日志门面： SLF4J； 日志实现：Logback； SpringBoot：底层是 Spring 框架，Spring 框架默认是用 JCL； SpringBoot 选用 SLF4j 和 logback SLF4j 的使用 如何在系统中使用 SLF4j 开发时，日志记录方法的调用，不应该调用日志类的实现类，而是调用日志抽象层的方法 给系统里面导入 slf4j 的 jar 和 logback 的实现 jar import org.slf4j.Logger; import org.slf4j.Logg....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/11/23/1606090789595.html">
+                            Spring Boot与日志
+                        </a>
+                    </h2>
+                            <div class="ico ico--5"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/SpringBoot">
+                                    SpringBoot
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20200714.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot之配置" href="https://wuruohui.github.io/articles/2020/11/20/1605886055349.html">
+                        配置文件 SpringBoot 使用一个全局的配置文件，配置文件名是固定的；用来修改SpringBoot自动配置的默认值 application.properties 跟 yml 文件类似，二者选择其一使用 person.age=20 #map的配置形式，每个键值对分开配置 person.map.k1=v1 person.map.k2=v2 #list的配置形式，每个元素用逗号隔开 person.list=a,b,c #对象的配置形式，对象中的每个属性分开赋值 person.dog.name=dog person.dog.age=10 application.yml YAML（YAML Ain't Markup Language) 标记语言： 以前的配置文件大多都是 XML 文件 YAML：以数据为中心，比 JSON、XML 等更适合做配置文件 server: port: 8081 基本语法 k: v：表示一对键值对（值前面必须有一个空格），以空格的缩进来控制层级关系，只要是左对齐的一列数据都是同一个层级的 server: port: 8081 path: /hello 属性和值.......
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/11/20/1605886055349.html">
+                            Spring Boot之配置
+                        </a>
+                    </h2>
+                            <div class="ico ico--6"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Java">
+                                    Java
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/file/2020/11/image-31048e9d.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring Boot入门" href="https://wuruohui.github.io/articles/2020/11/16/1605486187962.html">
+                        示例 依赖 &lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;parent&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; &lt;version&gt;2.3.6.RELEASE&lt;/version&gt; &lt;relati....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/11/16/1605486187962.html">
+                            Spring Boot入门
+                        </a>
+                    </h2>
+                            <div class="ico ico--7"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Java">
+                                    Java
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20190422.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring注解驱动开发拓展" href="https://wuruohui.github.io/articles/2020/10/25/1603583704409.html">
+                        BeanFactoryPostProcessor BeanFactoryPostProcessor：BeanFactory的后置处理器，在BeanFactory标准初始化之后调用，所有的Bean定义已经保存加载到BeanFactory，但是Bean的实例还未创建 执行时机： （1）IOC创建容器对象 （2）invokeBeanFactoryPostProcessors(beanFactory) -- 执行BeanFactoryProcessor 如何找到所有的BeanFactoryProcessor？ 直接在BeanFactory中找到所有类型是BeanFactoryPostProcessor的组件，并执行他们的方法 在初始化创建其他组件之前执行 @Component public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor { public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableLi......
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/10/25/1603583704409.html">
+                            Spring注解驱动开发拓展
+                        </a>
+                    </h2>
+                            <div class="ico ico--8"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Java">
+                                    Java
+                                </a>
+                </div>
+            </div>
+        </article>
+        <article class="item">
+            <div class="item__container">
+                <div class="item__cover" style="background-image: url(https://b3logfile.com/bing/20180912.jpg?imageView2/1/w/1280/h/720/interlace/1/q/100)"></div>
+                <div rel="bookmark" class="item__abstract">
+                    <a pjax-title="Spring注解驱动开发之声明式事务" href="https://wuruohui.github.io/articles/2020/10/22/1603377269375.html">
+                        简单使用 1.导入相关依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework&lt;/groupId&gt; &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt; &lt;version&gt;4.2.6.RELEASE&lt;/version&gt; &lt;/dependency&gt; 2.配置数据源、JdbcTemplate（Spring提供的简化数据库操作工具） @Bean public DataSource dataSource() throws PropertyVetoException { ComboPooledDataSource dataSource = new ComboPooledDataSource(); dataSource.setUser("root"); dataSource.setPassword("458974tl"); dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/test?useSSL=f.....
+                    </a>
+                </div>
+                <div class="item__slant"></div>
+                <div class="item__slant item__slant--white"></div>
+                <div class="item__main">
+                    <span class="item__sup">
+                    </span>
+                    <h2 class="item__title">
+                        <a rel="bookmark" href="https://wuruohui.github.io/articles/2020/10/22/1603377269375.html">
+                            Spring注解驱动开发之声明式事务
+                        </a>
+                    </h2>
+                            <div class="ico ico--9"></div>
+                                <a rel="tag" class="item__tag" href="https://wuruohui.github.io/tags/Java">
+                                    Java
+                                </a>
+                </div>
+            </div>
+        </article>
 </main>
-{% include pageNav.html %}
-{% include footer.html %}
+    <nav class="pagination">
+                <span class="pagination__item pagination__item--current">1</span>
+                <a class="pagination__item"
+                   href="https://wuruohui.github.io/p/2">2</a>
+                <a class="pagination__item"
+                   href="https://wuruohui.github.io/p/3">3</a>
+    </nav>
+    </div>
+    
+</main>
+<footer class="footer">
+    <div class="ft__center">
+    </div>
+    <nav class="footer__nav mobile__none">
+        <a class="ft__link" rel="alternate" href="https://wuruohui.github.io/rss.xml" rel="section">RSS</a>
+    </nav>
+    <div class="footer__border mobile__none"></div>
+    <div class="wrapper fn__flex">
+        <div class="fn__flex-1 mobile__none">
+            <div class="ft__fade">WuRuoHui - 记录精彩的程序人生</div>
+            <br>
+                Open Source, Open Mind, <br/>Open Sight, Open Future!
+
+<!-- 公告栏可使用 HTML、JavaScript，比如可以在此加入第三方统计 js -->
+        </div>
+
+
+        <div class="fn__flex-1 footer__copyright">
+            <a class="ft__link" href="https://wuruohui.github.io/archives.html">
+                56
+                文章
+            </a>
+           <br>
+            <span data-uvstaturl="https://wuruohui.github.io">0</span> <span class="ft-gray">浏览</span>
+ <br>
+            &copy; 2021
+            <a class="ft__link" href="https://wuruohui.github.io">WuRuoHui 的个人博客</a>
+            
+        </div>
+    </div>
+</footer>
+<script>
+  var Label = {
+    speech: true,
+    servePath: "https://wuruohui.github.io",
+    staticServePath: "https://wuruohui.github.io",
+    luteAvailable: false,
+    hljsStyle: 'github',
+    langLabel: "zh_CN",
+    version: "4.3.1",
+    staticSite: true,
+    showCodeBlockLn: false,
+  }
+</script>
+<script type="text/javascript" src="https://wuruohui.github.io/skins/Pinghsu/js/headroom.min.js"></script>
+<script type="text/javascript"
+        src="https://wuruohui.github.io/skins/Pinghsu/js/common.min.js?1613894294256"
+        charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.css"/>
+<script async src="https://cdn.jsdelivr.net/npm/kanbanniang@0.2.10/index.js"></script>
+<div class="solo-kanbanniang">
+    <div class="solo-kanbanniang__tip"></div>
+    <canvas id="soloKanbanniang" width="280" height="250"></canvas>
+    <div class="solo-kanbanniang__tool">
+        <svg id="soloKanbanniangHome" viewBox="0 0 32 32" width="100%" height="100%">
+            <path d="M32 18.967l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18.516v12h-8v-8h-8v8h-8v-12l12-9z"></path>
+        </svg>
+        <svg id="soloKanbanniangRSS" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M320.364 768q0 45.728-32 77.728t-77.728 32-77.728-32-32-77.728 32-77.728 77.728-32 77.728 32 32 77.728zM612.94 838.272q1.152 16-9.728 27.424-10.272 12-26.848 12h-77.152q-14.272 0-24.576-9.44t-11.424-23.712q-12.576-130.848-105.44-223.712t-223.712-105.44q-14.272-1.152-23.712-11.424t-9.44-24.576V402.24q0-16.576 12-26.848 9.728-9.728 24.576-9.728h2.848q91.424 7.424 174.848 46.016t148 103.712q65.152 64.576 103.712 148t46.016 174.848z m292.576 1.152q1.152 15.424-10.272 26.848-10.272 11.424-26.272 11.424h-81.728q-14.848 0-25.44-10.016t-11.136-24.288q-6.848-122.848-57.728-233.44t-132.288-192-192-132.288-233.44-58.272q-14.272-0.576-24.288-11.136t-10.016-24.864V109.664q0-16 11.424-26.272 10.272-10.272 25.152-10.272h1.728q149.728 7.424 286.56 68.576t243.136 168q106.848 106.272 168 243.136t68.576 286.56z"></path>
+        </svg>
+        <svg id="soloKanbanniangChat" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M802.42709 96.163153H219.476155c-84.48109 0-154.896836 71.746044-154.896836 157.840888v393.119449c0 86.072331 70.415746 157.819398 154.896836 157.819399h214.038818V925.470963s22.526039 40.168862 64.767096 5.734608c30.965246-25.819039 126.721123-91.828428 171.775248-123.385145h132.369773c84.502579 0 154.896836-83.21526 154.896836-157.839865V251.125481c0-86.094844-70.394257-154.962328-154.896836-154.962328zM301.144176 518.002714c-39.427988 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044 39.426965 0 70.393233 31.577183 70.393234 71.746044 0 40.169885-30.966269 71.746044-70.393234 71.746044z m208.411657 0c-39.450501 0-70.415746-31.576159-70.415746-71.746044 0-40.168862 30.965246-71.746044 70.415746-71.746044 39.405475 0 70.394257 31.577183 70.394257 71.746044 0 40.169885-30.988782 71.746044-70.394257 71.746044z m211.203236 0c-39.426965 0-70.416769-31.576159-70.416769-71.746044 0-40.168862 30.988782-71.746044 70.416769-71.746044s70.415746 31.577183 70.415746 71.746044c-0.001023 40.169885-30.988782 71.746044-70.415746 71.746044z"></path>
+        </svg>
+        <svg id="soloKanbanniangChange" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M936.672 193.216l-226.88-64c-8.704-2.528-18.112-1.12-25.824 3.776-7.68 4.864-12.896 12.736-14.432 21.728C655.712 236.928 595.328 288 512 288c-71.424 0-142.464-103.296-163.776-143.104-7.136-13.28-22.528-19.84-37.024-15.68l-224 64C73.472 197.152 64 209.728 64 224v256a31.93 31.93 0 0 0 11.712 24.736c7.392 6.08 17.152 8.512 26.56 6.624L224 487.04V832c0 52.928 43.072 96 96 96h384c52.928 0 96-43.072 96-96V519.04l121.728 24.352c9.44 1.92 19.2-0.544 26.56-6.624C955.68 530.656 960 521.6 960 512V224c0-14.336-9.536-26.912-23.328-30.784zM672 800H352c-17.664 0-32-14.304-32-32s14.336-32 32-32h320c17.696 0 32 14.304 32 32s-14.304 32-32 32z"></path>
+        </svg>
+        <svg id="soloKanbanniangPhoto" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M898.048 258.048q23.552-1.024 46.592 9.216t40.96 27.136 28.672 39.424 10.752 46.08l0 390.144q0 24.576-10.752 47.104t-28.672 40.448-40.96 28.16-47.616 10.24l-697.344 0q-24.576 0-48.64-10.24t-42.496-27.648-29.696-40.448-11.264-48.64l0-381.952q0-22.528 10.752-45.568t28.672-41.472 39.936-30.208 44.544-11.776l63.488 0 13.312-83.968q3.072-20.48 18.432-32.768t34.816-12.288l456.704 0q19.456 0 34.304 10.752t16.896 34.304l14.336 83.968 54.272 0zM548.864 712.704q40.96 0 77.824-15.872t63.488-42.496 42.496-62.976 15.872-77.312-15.872-77.312-42.496-62.976-63.488-42.496-77.824-15.872-77.312 15.872-63.488 42.496-43.008 62.976-15.872 77.312 15.872 77.312 43.008 62.976 63.488 42.496 77.312 15.872z"></path>
+        </svg>
+        <svg id="soloKanbanniangGithub" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M1024 524.8c0 114.346667-32.554667 217.216-97.706667 308.565333-65.066667 91.306667-149.162667 154.538667-252.288 189.610667-11.989333 2.304-20.778667 0.682667-26.325333-4.778667a27.605333 27.605333 0 0 1-8.362667-20.48v-144.213333c0-44.16-11.52-76.501333-34.645333-97.024 25.344-2.730667 48.085333-6.826667 68.309333-12.288a268.629333 268.629333 0 0 0 62.72-26.666667 187.434667 187.434667 0 0 0 53.973334-45.44c14.421333-18.005333 26.197333-41.898667 35.328-71.765333 9.088-29.824 13.653333-64.128 13.653333-102.826667 0-55.125333-17.536-102.058667-52.650667-140.8 16.426667-41.429333 14.677333-87.893333-5.333333-139.392-12.458667-4.096-30.464-1.578667-54.016 7.509334a355.328 355.328 0 0 0-61.312 30.08L640 271.274667a462.336 462.336 0 0 0-128-17.749334c-43.989333 0-86.656 5.930667-128 17.749334a589.824 589.824 0 0 0-28.330667-18.432c-11.776-7.253333-30.336-16.042667-55.68-26.325334-25.344-10.24-44.416-13.312-57.301333-9.216-19.584 51.498667-21.12 97.962667-4.693333 139.434667-35.114667 38.698667-52.650667 85.632-52.650667 140.757333 0 38.698667 4.565333 72.874667 13.653333 102.485334 9.130667 29.610667 20.778667 53.546667 34.986667 71.765333 14.250667 18.218667 32.128 33.493333 53.674667 45.781333 21.546667 12.288 42.453333 21.205333 62.677333 26.666667 20.224 5.461333 43.008 9.557333 68.309333 12.288-17.749333 16.384-28.629333 39.850667-32.64 70.4a130.005333 130.005333 0 0 1-29.994666 10.24c-10.666667 2.261333-23.338667 3.413333-37.973334 3.413333-14.72 0-29.269333-4.906667-43.690666-14.677333-14.464-9.813333-26.794667-24.064-36.992-42.709333a109.226667 109.226667 0 0 0-32.341334-35.541334c-13.141333-9.130667-24.106667-14.592-33.024-16.426666l-13.312-2.048c-9.344 0-15.786667 1.024-19.328 3.072-3.584 2.090667-4.693333 4.693333-3.328 7.893333 1.28 3.157333 3.328 6.4 5.973334 9.557333 2.688 3.2 5.546667 5.930667 8.661333 8.192l4.693333 3.413334c9.770667 4.565333 19.413333 13.226667 29.013334 25.984 9.514667 12.757333 16.512 24.362667 20.992 34.858666l6.656 15.701334c5.76 17.322667 15.530667 31.317333 29.312 42.026666 13.781333 10.666667 28.672 17.536 44.672 20.48 16 2.986667 31.445333 4.565333 46.336 4.821334 14.890667 0.213333 27.221333-0.597333 36.992-2.389334l15.36-2.730666c0 17.28 0.085333 37.546667 0.298666 60.8l0.341334 36.906666a27.050667 27.050667 0 0 1-8.661334 20.48c-5.76 5.461333-14.677333 7.082667-26.666666 4.778667-103.125333-35.072-187.221333-98.261333-252.330667-189.610667C32.554667 742.058667 0 639.146667 0 524.8c0-95.232 22.869333-183.04 68.693333-263.466667A516.266667 516.266667 0 0 1 254.976 70.4C333.44 23.466667 419.114667 0 512 0c92.885333 0 178.56 23.466667 256.981333 70.4a516.266667 516.266667 0 0 1 186.368 190.976C1001.130667 341.802667 1024 429.653333 1024 524.842667z"></path>
+        </svg>
+        <svg id="soloKanbanniangClose" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M517.572566143763 1018.6748601482986C238.26554897656422 1018.6748601482986 11.897910175114305 792.2714997690043 11.897910175114305 513.0002041796496c0-279.3070171671984 226.36763880144977-505.71037754649296 505.6746559686481-505.71037754649296 279.2712955893538 0 505.6746559686481 226.40336037929444 505.6746559686481 505.71037754649296C1023.2472221124112 792.2714997690043 796.8795833109612 1018.6748601482986 517.572566143763 1018.6748601482986zM754.7281214542927 339.25044954334646c13.752807470184345-13.752807470184345 9.680547595895998-40.186775075214015-9.073280772537204-58.94060344364717l-2.143294670678079-2.1075730928334457c-18.7538283684332-18.7538283684332-45.15207439561819-22.861809820566194-58.90488186580257-9.073280772537204l-168.21291007038468 168.24863164822932-180.42968969324974-180.46541127109438c-13.967136937252159-13.967136937252159-40.72259874288353-9.823433907274534-59.72647815622916 9.216167083915742l-2.143294670678079 2.143294670678079c-19.039600991190277 19.003879413345654-23.111860865478626 45.75934121897699-9.180445506071107 59.655035000539876l180.42968969324974 180.46541127109438-176.07165719620428 176.03593561835962c-13.788529048028984 13.824250625873615-9.716269173740633 40.151053497369375 9.073280772537204 58.94060344364717l2.1075730928334457 2.1075730928334457c18.7538283684332 18.7538283684332 45.15207439561819 22.897531398410823 58.90488186580257 9.073280772537204l176.10737877404887-176.10737877404887 170.39192631890742 170.42764789675192c13.967136937252159 13.931415359407513 40.686877165038865 9.85915548511917 59.690756578384516-9.180445506071107l2.1790162485227142-2.1790162485227142c19.039600991190277-18.968157835501014 23.147582443323273-45.72361964113239 9.180445506071107-59.690756578384516l-170.39192631890742-170.42764789675192L754.7281214542927 339.25044954334646z"></path>
+        </svg>
+    </div>
+</div>
+
+</body>
+</html>
+<!-- Generated by Latke (https://github.com/88250/latke) in 22ms, 2021/02/21 15:59:54 -->
