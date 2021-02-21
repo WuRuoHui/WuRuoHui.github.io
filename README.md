@@ -379,5 +379,6 @@ HardCandy-Jekyll is licensed under [MIT](https://github.com/xukimseven/HardCand
 
 
 ### 求Star 求关注
-
 看到这里，如果你喜欢我的小项目，欢迎下载使用他，也请你为我点个小星星 😜 ，多谢。
+
+![https://b3logfile.com/file/2021/02/solofetchupload8127028033331902327-134311ac.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100]
