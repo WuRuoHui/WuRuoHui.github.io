@@ -19,8 +19,6 @@ tags: 学习笔记
 
 #### 创建GitHub账号
 
-<img src="https://b3logfile.com/file/2021/02/solofetchupload8127028033331902327-134311ac.png?imageView2/2/w/1280/format/jpg/interlace/1/q/100
-" >
 
 <img src="https://i.loli.net/2019/08/13/CGB7Rm45gS1yTuz.png" >
 
